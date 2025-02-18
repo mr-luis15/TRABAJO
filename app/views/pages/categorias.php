@@ -12,7 +12,7 @@ require_once '../../model/Categorias.php';
 
 
 <div class="main">
-    <h2 class="h2">Lista de Categorias cambio</h2>
+    <h2 class="h2">Lista de Categorias</h2>
     <hr>
     <div class="card">
 
