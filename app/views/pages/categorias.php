@@ -42,7 +42,7 @@ require_once '../../model/Categorias.php';
                         $cat = new Categorias();
                         $resultado = $cat->obtenerCategorias();
 
-                        if ($resultado) {
+                        if ($resultado != NULL) {
 
                             foreach ($resultado as $categoria) {
 

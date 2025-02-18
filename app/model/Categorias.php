@@ -71,7 +71,7 @@ class Categorias {
 
     public function eliminar() {
 
-        $query = "DELETE FROM usuarios WHERE id = :id";
+        $query = "DELETE FROM categorias WHERE id = :id";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':id', $this->id);

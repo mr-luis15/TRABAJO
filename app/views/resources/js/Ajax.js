@@ -464,34 +464,48 @@ $(document).ready(function () {
 
 
 
-function eliminarCategoria(id) {
+function eliminarCategoria(idCat) {
 
-    console.log(id);
+    Swal.fire({
+        title: "¿Seguro que quires eliminar esta categoria?",
+        text: "Todos los productos relacionados seran marcados como 'Categoria no asignada'",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "No"
+    }).then((result) => {
+        if (result.isConfirmed) {
 
-    $.ajax({
+            console.log(idCat);
 
-        url: controller('categorias', 'eliminarCategoria'),
-        type: 'POST',
-        data : {id: id},
-        dataType: 'json',
-        success: function (response) {
+            $.ajax({
 
-            const mensaje = response.message;
+                url: controller('categorias', 'eliminarCategoria'),
+                type: 'POST',
+                data: { id: idCat },
+                dataType: 'json',
+                success: function (response) {
 
-            if (response.status === 'success') {
-                deleted(mensaje);
-            }
+                    const mensaje = response.message;
 
-            if (response.status === 'error') {
-                error(mensaje);
-            }
+                    if (response.status === 'success') {
+                        deleted(mensaje);
+                    }
 
-        },
+                    if (response.status === 'error') {
+                        error(mensaje);
+                    }
 
-        error: function (xhr, status, error) {
-            error_servidor();
+                },
+
+                error: function (xhr, status, error) {
+                    error_servidor();
+                }
+
+            })
         }
-
     })
 
 }
