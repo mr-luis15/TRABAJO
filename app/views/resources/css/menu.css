@@ -1,0 +1,416 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen en dispositivos más pequeños */
+}
+
+.h2 {
+
+    text-align: center !important;
+    margin-bottom: 5vh !important;
+
+}
+
+/* Estilos base del sidebar */
+.sidebar {
+    position: fixed;
+    bottom: 0;
+    height: 100vh;
+    width: 10vw;
+    background-color: #2f74c8;
+    display: block;
+    padding: 0;
+    overflow-y: auto;
+    transition: all 0.3s ease; /* Transición suave */
+    z-index: 1000;
+}
+
+.image-container {
+    width: 100%;
+    height: 20vh;
+    background-color: #4384d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    display: block;
+    list-style-type: none;
+}
+
+ul a {
+    color: white;
+    text-decoration: none;
+    padding: 2vh;
+    height: 7vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+}
+
+ul a i {
+    margin-right: 15px;
+    font-size: 1.5rem;
+}
+
+ul a span {
+    display: inline-block; /* Mostrar texto por defecto */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+ul a:hover {
+    color: #92b0db;
+}
+
+#logout {
+    background-color: #d04141;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 7vh;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+#logout:hover {
+    background-color: #d85050;
+}
+
+/* Media queries para pantallas menores a 1000px */
+@media screen and (max-width: 1000px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: auto;
+        width: 100%; /* Ocupa todo el ancho */
+        height: auto; /* Ajusta la altura automáticamente */
+        display: flex; /* Cambiar diseño a horizontal */
+        justify-content: space-between; /* Espaciado horizontal */
+        overflow-x: auto; /* Habilitar desplazamiento horizontal si es necesario */
+    }
+
+    ul {
+        display: flex; /* Cambiar diseño de la lista a horizontal */
+        width: 100%;
+    }
+
+    ul a {
+        justify-content: center; /* Centrar íconos y texto */
+        height: auto; /* Ajustar altura automáticamente */
+        padding: 10px; /* Ajustar espacio interior */
+        flex: 1; /* Distribuir enlaces equitativamente */
+    }
+
+    ul a i {
+        margin-right: 0; /* Eliminar margen entre ícono y texto */
+    }
+
+    ul a span {
+        display: none; /* Ocultar texto en pantallas pequeñas */
+    }
+
+    .image-container {
+        display: none; /* Ocultar el contenedor de la imagen en pantallas pequeñas */
+    }
+
+    .main {
+        width: 100% !important;
+        height: 95% !important;
+        bottom: 0;
+    }
+}
+
+
+/*
+table{
+	width: 100%;
+	border-collapse: collapse;
+	border-color: white;
+}
+
+table thead {
+    background-color: #2f74c8;
+    color: white;
+}
+
+table, th, td {
+	border: 1px solid #ddd;
+	
+}
+
+th,td{
+	padding: 12px;
+	text-align: left;
+}
+
+th{
+	background-color: #343a40;
+	color: white;
+}
+
+tr:nth-child(even) {
+	background-color: f2f2f2;
+}
+
+tr:hover{
+	background-color: #ddd;
+} */
+
+.table thead {
+    background-color: #2f74c8 !important;
+    color: white !important;
+}
+
+
+.main {
+    width: 90%;
+    height: 100%;
+    background-color: #f0f0f0;
+    right: 0;
+    position: fixed;
+    padding: 5vh 8vh 5vh 8vh;
+    overflow-y: auto;
+}
+
+.contenedor-botones {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 3vh;
+}
+
+.contenedor-botones #usuarios,
+#servicios,
+#productos,
+#pedidos,
+#categoria,
+#tecnicos,
+#empleados,
+#inventario {
+    padding: 0;
+    width: 18vw;
+    cursor: pointer;
+    display: grid;
+    color: white;
+    transition: background-color 0.3s ease;
+    box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, .4);
+    text-decoration: none;
+    /*border-radius: 8px; /* Esquinas redondeadas */
+}
+
+.contenedor-botones .contenedor-imagen {
+    padding: 10px;
+    font-size: 5vh;
+    text-align: center;
+}
+
+.contenedor-botones .contenedor-texto {
+    padding: 5px;
+    text-align: center;
+}
+
+#usuarios {
+    background-color: #3982dc;
+}
+
+#usuarios:hover {
+    background-color: #5697e7;
+}
+
+#productos {
+    background-color: #d04141;
+}
+
+#productos:hover {
+    background-color: #d85050;
+}
+
+#servicios {
+    background-color: #21b561;
+}
+
+#servicios:hover {
+    background-color: #37c072;
+}
+
+#pedidos {
+    background-color: #4d33d1;
+}
+
+#pedidos:hover {
+    background-color: #6049d0;
+}
+
+#categoria {
+    background-color: #d6813a;
+}
+
+#categoria:hover {
+    background-color: #e4985a;
+}
+
+#tecnicos {
+    background-color: #c93595;
+}
+
+#tecnicos:hover {
+    background-color: #c74f9d;
+}
+
+#empleados {
+    background-color: #21ad9f;
+}
+
+#empleados:hover {
+    background-color: #2ebdaf;
+}
+
+#inventario {
+    background-color: #33b41a;
+}
+
+#inventario:hover {
+    background-color: #57bc43;
+}
+
+#volver {
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Aumentamos el tamaño de la barra lateral en pantallas pequeñas */
+    }
+
+    .main {
+        padding: 2vh 4vh; /* Reducimos el padding en pantallas pequeñas */
+    }
+
+    .contenedor-botones #usuarios,
+    .contenedor-botones #servicios,
+    .contenedor-botones #productos,
+    .contenedor-botones #pedidos,
+    .contenedor-botones #categoria,
+    .contenedor-botones #tecnicos,
+    .contenedor-botones #empleados,
+    .contenedor-botones #inventario {
+        width: 45vw; /* Reducimos el tamaño de los botones en pantallas pequeñas */
+        margin-top: 1vh;
+    }
+
+    .image-container {
+        height: 30vh; /* Aumentamos la altura de la imagen en pantallas pequeñas */
+    }
+
+    ul a {
+        padding: 3vh;
+        font-size: 1.2rem; /* Reducimos el tamaño de la fuente */
+    }
+}
+
+@media (max-width: 680px) {
+    .sidebar {
+        width: 100%; /* Aumentamos aún más el tamaño de la barra lateral en pantallas móviles */
+        height: 10vh;
+    }
+
+    .contenedor-botones #usuarios,
+    .contenedor-botones #servicios,
+    .contenedor-botones #productos,
+    .contenedor-botones #pedidos,
+    .contenedor-botones #categoria,
+    .contenedor-botones #tecnicos,
+    .contenedor-botones #empleados,
+    .contenedor-botones #inventario {
+        width: 80vw; /* Los botones ocuparán más espacio en pantallas muy pequeñas */
+    }
+
+    .image-container {
+        height: 40vh; /* Aumentamos la altura de la imagen en pantallas muy pequeñas */
+    }
+
+    ul a {
+        font-size: 1rem; /* Aumentamos la legibilidad del texto */
+    }
+
+    .contenedor-botones .contenedor-imagen {
+        font-size: 6vh; /* Aumentamos el tamaño de los iconos */
+    }
+
+    .main {
+        height: 90vh;
+        margin-top: 10vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%; /* Aumentamos aún más el tamaño de la barra lateral en pantallas móviles */
+    }
+
+    .contenedor-botones #usuarios,
+    .contenedor-botones #servicios,
+    .contenedor-botones #productos,
+    .contenedor-botones #pedidos,
+    .contenedor-botones #categoria,
+    .contenedor-botones #tecnicos,
+    .contenedor-botones #empleados,
+    .contenedor-botones #inventario {
+        width: 80vw; /* Los botones ocuparán más espacio en pantallas muy pequeñas */
+    }
+
+    .image-container {
+        height: 40vh; /* Aumentamos la altura de la imagen en pantallas muy pequeñas */
+    }
+
+    ul a {
+        font-size: 1rem; /* Aumentamos la legibilidad del texto */
+    }
+
+    .contenedor-botones .contenedor-imagen {
+        font-size: 6vh; /* Aumentamos el tamaño de los iconos */
+    }
+}
+
+
+
+.card {
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 0px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recuadro-button {
+    background-color: #2f74c8; 
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 10px 10px 0 0;
+}
+
+
+
+
