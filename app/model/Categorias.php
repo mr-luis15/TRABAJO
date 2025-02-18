@@ -104,6 +104,19 @@ class Categorias {
 
     }
 
+
+    public function existeCategoriaById() {
+
+        $query = "SELECT id FROM categorias WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0 ? true :  false;
+
+    }
+
 }
 
 
