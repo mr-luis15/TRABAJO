@@ -125,7 +125,7 @@ function validarDatosCategoria($data, $accion) {
 
     if ($accion == 'editar') {
 
-        if (!isset($data['id']) || empty($data['id'])) {
+        if (!isset($data['id']) || empty($data['id']) || !is_numeric($data['id'])) {
             return false;
         }
 

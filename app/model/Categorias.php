@@ -28,7 +28,7 @@ class Categorias {
         $this->nombre = $nombre;
     }
 
-    public function setDescripciob($descripcion) {
+    public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
 
@@ -46,7 +46,7 @@ class Categorias {
         return $this->nombre;
     }
 
-    public function getDescripciob() {
+    public function getDescripcion() {
         return $this->descripcion;
     }
 
@@ -80,6 +80,20 @@ class Categorias {
 
     }
 
+    public function editar() {
+
+        $query = "UPDATE categorias SET nombre = :nombre, descripcion = :descripcion WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':descripcion', $this->descripcion);
+        $stmt->bindParam(':id', $this->id);
+
+        return $stmt->execute() ? true : false;
+
+
+    }
+
 
     public function existeCategoriaByNombre() {
 
@@ -98,6 +112,19 @@ class Categorias {
         $query = "SELECT * FROM categorias";
 
         $stmt = $this->PDO->prepare($query);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
+
+    }
+
+
+    public function obtenerCategoriaById() {
+
+        $query = "SELECT * FROM categorias WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $this->id);
         $stmt->execute();
 
         return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;

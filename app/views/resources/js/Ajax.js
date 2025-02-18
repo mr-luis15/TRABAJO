@@ -511,6 +511,56 @@ function eliminarCategoria(idCat) {
 }
 
 
+$(document).ready(function () {
+    $('#editar_categoria').on('click', function () {
+
+        var data = {
+
+            id: $('#id').val(),
+            nombre: $('#nombre').val(),
+            descripcion: $('#descripcion').val()
+        };
+
+
+        console.log(data);
+
+        $.ajax({
+            url: controller('categorias', 'editarCategoria'),
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+
+                const mensaje = response.message;
+
+                if (response.status === 'success') {
+                    Swal.fire({
+
+                        title: "Modificado con exito",
+                        text: mensaje,
+                        icon: "success",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href='categorias.php' 
+                        }
+                    });
+
+                } else if (response.status === 'error') {
+                    Swal.fire({
+                        title: "Error",
+                        text: mensaje,
+                        icon: "error",
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                error_servidor();
+            }
+
+        });
+    });
+});
+
 
 
 function redirigirPorNivel(nivel) {

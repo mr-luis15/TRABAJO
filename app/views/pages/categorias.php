@@ -5,6 +5,7 @@ session_start();
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
 require_once '../../model/Categorias.php';
+require_once '../../routes/RouteController.php';
 
 ?>
 
@@ -39,25 +40,25 @@ require_once '../../model/Categorias.php';
 
                         <?php
 
-                        $cat = new Categorias();
-                        $resultado = $cat->obtenerCategorias();
+                        $categoria = new Categorias();
+                        $resultado = $categoria->obtenerCategorias();
 
                         if ($resultado != NULL) {
 
-                            foreach ($resultado as $categoria) {
+                            foreach ($resultado as $cat) {
 
                                 ?>
                                     <tr>
-                                        <td><?php echo $categoria['id']; ?></td>
-                                        <td><?php echo $categoria['nombre']; ?></td>
-                                        <td><?php echo $categoria['descripcion']; ?></td>
+                                        <td><?php echo $cat['id']; ?></td>
+                                        <td><?php echo $cat['nombre']; ?></td>
+                                        <td><?php echo $cat['descripcion']; ?></td>
                 
                                         <td>
-                                            <a class="btn btn-danger" onclick="eliminarCategoria(<?php echo $categoria['id'] ?>)">
+                                            <a class="btn btn-danger" onclick="eliminarCategoria(<?php echo $cat['id'] ?>)">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
 
-                                            <a class="btn btn-warning">
+                                            <a class="btn btn-warning" href="<?php echo Route::url('editarCategoria') . '?id=' . $cat['id'] ?>">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                         </td>

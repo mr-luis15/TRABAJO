@@ -19,7 +19,7 @@ if (!validarDatosCategoria($_POST, 'crear')) {
 $cat = new Categorias();
 
 $cat->setNombre($_POST['nombre']);
-$cat->setDescripciob($_POST['descripcion']);
+$cat->setDescripcion($_POST['descripcion']);
 
 
 if ($cat->existeCategoriaByNombre()) {
