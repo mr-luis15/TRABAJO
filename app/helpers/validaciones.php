@@ -142,6 +142,29 @@ function validarDatosCategoria($data, $accion) {
 
 }
 
+
+function validarDatosProductos($data, $accion) {
+
+    if ($accion == 'editar') {
+
+        if (!isset($data['id']) || empty($data['id']) || !is_numeric($data['id'])) {
+            return false;
+        }
+
+    }
+
+    $camposRequeridos = ['nombre', 'descripcion', 'precio', 'stock', 'categoria'];
+    foreach ($camposRequeridos as $campo) {
+        if (empty($data[$campo])) {
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+
 function numeroProductosIsNull($numeroProductos) {
 
     if ($numeroProductos == NULL) {

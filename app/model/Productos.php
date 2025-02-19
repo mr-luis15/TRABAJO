@@ -9,7 +9,8 @@ class Producto {
     private $nombre;
     private $precio;
     private $stock;
-    private $id_categoria;
+    private $categoria;
+    private $descripcion;
     private $PDO;
 
 
@@ -37,8 +38,12 @@ class Producto {
         $this->stock = $stock;
     }
 
-    public function setCategoria($id_categoria) {
-        $this->id_categoria = $id_categoria;
+    public function setCategoria($categoria) {
+        $this->categoria = $categoria;
+    }
+
+    public function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
     }
 
 
@@ -59,8 +64,55 @@ class Producto {
     }
 
     public function getCategoria() {
-        return $this->id_categoria;
+        return $this->categoria;
     }
+
+    public function getDescripcion() {
+        return $this->descripcion;
+    }
+
+
+    public function crear() {
+
+        $query = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria) VALUES (:nombre, :descripion, :precio, :stock, :categoria)";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':descripcion', $this->descripcion);
+        $stmt->bindParam(':precio', $this->precio);
+        $stmt->bindParam(':stock', $this->stock);
+        $stmt->bindParam(':categoria', $this->categoria);
+
+        return $stmt->execute() ? true : false;
+    }
+
+    public function eliminar() {
+
+        $query = "DELETE FROM productos WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        
+
+        return $stmt->execute() ? true : false;
+    }
+
+    public function editar() {
+
+        $query = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, stock = :stock, categoria = :categoria WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':descripcion', $this->descripcion);
+        $stmt->bindParam(':precio', $this->precio);
+        $stmt->bindParam(':stock', $this->stock);
+        $stmt->bindParam(':categoria', $this->categoria);
+
+        return $stmt->execute() ? true : false;
+    }
+
+    
 }
 
 ?>
