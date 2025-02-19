@@ -563,6 +563,53 @@ $(document).ready(function () {
 
 
 
+//PRODUCTOS
+
+$(document).ready(function () {
+    $('#agregar_producto').on('click', function () {
+
+        var data = {
+
+            nombre: $('#nombre').val(),
+            descripcion: $('#descripcion').val(),
+            stock: $('#stock').val(),
+            precio: $('#precio').val(),
+            categoria: $('#categoria').val()
+        };
+
+
+        console.log(data);
+
+        $.ajax({
+            url: controller('productos', 'crearProducto'),
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+
+                const mensaje = response.message;
+
+                if (response.status === 'success') {
+                    agregado(mensaje)
+
+                } else if (response.status === 'error') {
+                    Swal.fire({
+                        title: "Error",
+                        text: mensaje,
+                        icon: "error",
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                error_servidor();
+            }
+
+        });
+    });
+});
+
+
+
 function redirigirPorNivel(nivel) {
 
     switch (nivel) {

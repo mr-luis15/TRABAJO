@@ -1,6 +1,6 @@
 <?php
 
-require_once './database/Conexion.php';
+require_once 'database/Conexion.php';
 
 
 class Producto {
@@ -112,7 +112,17 @@ class Producto {
         return $stmt->execute() ? true : false;
     }
 
+    public function obtenerProductos() {
+
+        $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, c.nombre AS categoria_nombre FROM productos p LEFT JOIN categorias c ON p.categoria = c.id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
+
+    }
+
     
 }
 
-?>

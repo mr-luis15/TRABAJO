@@ -4,6 +4,9 @@ session_start();
 
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
+require_once '../../model/Productos.php';
+require_once '../../routes/RouteController.php';
+require_once '../../helpers/helpers.php';
 
 ?>
 
@@ -18,7 +21,7 @@ require_once '../resources/layout/menu.php';
 
 
     <div class="recuadro-button">
-            <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+            <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalProductos">
                 <i class="fas fa-user-plus"></i> Agregar producto
             </button>
         </div>
@@ -31,6 +34,9 @@ require_once '../resources/layout/menu.php';
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Categoria</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -39,18 +45,40 @@ require_once '../resources/layout/menu.php';
                     <?php
 
 
+                    $productos = new Producto();
+                    $resultado = $productos->obtenerProductos();
 
-                    if ($listado) {
 
+                    if ($resultado != false) {
 
-                        foreach ($listado as $usuario) {
+                        foreach ($resultado as $prod) {
                             
+                            ?>
+                                    <tr>
+                                        <td><?php echo $prod['id']; ?></td>
+                                        <td><?php echo $prod['nombre']; ?></td>
+                                        <td><?php echo $prod['descripcion']; ?></td>
+                                        <td><?php echo $prod['precio']; ?></td>
+                                        <td><?php echo $prod['stock']; ?></td>
+                                        <td><?php echo isNull($prod['categoria_nombre'], '<b style="color: red">No asignada</b>'); ?></td>
+
+                                        <td>
+                                            <a class="btn btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+
+                                            <a class="btn btn-warning">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
                         }
 
 
                     } else {
 
-                        echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
+                        echo "<tr><td colspan='7' class='text-center'>No hay datos disponibles</td></tr>";
 
                     }
 
@@ -70,5 +98,6 @@ require_once '../resources/layout/menu.php';
 <?php
 
 require_once '../resources/layout/footer.php';
+require_once '..//resources/layout/form_productos.php';
 
 ?>
