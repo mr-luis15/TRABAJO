@@ -136,7 +136,7 @@ class Producto {
 
     public function obtenerProductos() {
 
-        $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, c.nombre AS categoria_nombre FROM productos p LEFT JOIN categorias c ON p.categoria = c.id";
+        $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, p.estado, c.nombre AS categoria_nombre FROM productos p LEFT JOIN categorias c ON p.categoria = c.id";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->execute();
@@ -155,6 +155,19 @@ class Producto {
         $stmt->execute();
 
         return $stmt->rowCount() > 0 ? true : false;
+
+    }
+
+
+    public function obtenerProductoById() {
+
+        $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, p.categoria, p.estado, c.nombre AS categoria_nombre FROM productos p LEFT JOIN categorias c ON p.categoria = c.id WHERE p.id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
 
     }
 

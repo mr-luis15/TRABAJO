@@ -534,16 +534,17 @@ $(document).ready(function () {
                 const mensaje = response.message;
 
                 if (response.status === 'success') {
-                    Swal.fire({
 
-                        title: "Modificado con exito",
+                    Swal.fire({
+                        title: "Modificado con éxito",
                         text: mensaje,
                         icon: "success",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href='categorias.php' 
-                        }
+                        timer: 2000, // Redirige automáticamente en 2 segundos
+                        showConfirmButton: true
+                    }).then(() => {
+                        window.location.href = 'categorias.php';
                     });
+                    
 
                 } else if (response.status === 'error') {
                     Swal.fire({
@@ -610,6 +611,73 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+
+
+$(document).ready(function () {
+    $('#editar_producto').on('click', function () {
+
+        var data = {
+
+            id: $('#id').val(),
+            nombre: $('#nombre').val(),
+            descripcion: $('#descripcion').val(),
+            stock: $('#stock').val(),
+            precio: $('#precio').val(),
+            id_categoria: $('#id_categoria').val(),
+            estado: $('#estado').val()
+        };
+
+
+        console.log(data);
+
+        $.ajax({
+            url: controller('productos', 'editarProducto'),
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+
+                const mensaje = response.message;
+
+                if (response.status === 'success') {
+
+                    Swal.fire({
+
+                        title: "Modificado con exito",
+                        text: mensaje,
+                        icon: "success",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'productos.php'
+                        }
+                    });
+
+
+
+                } else if (response.status === 'error') {
+                    Swal.fire({
+                        title: "Error",
+                        text: mensaje,
+                        icon: "error",
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error AJAX:", status, error, xhr.responseText);
+                error_servidor();
+            }
+
+        });
+    });
+});
+
+
+
+
+
 
 
 

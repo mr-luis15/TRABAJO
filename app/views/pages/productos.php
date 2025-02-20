@@ -24,12 +24,16 @@ require_once '../../helpers/helpers.php';
             <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalProductos">
                 <i class="fas fa-user-plus"></i> Agregar producto
             </button>
+
+            <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalProductos">
+                <i class="fas fa-user-plus"></i> Productos no disponibles
+            </button>
         </div>
 
 
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead">
+                <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nombre</th>
@@ -69,7 +73,7 @@ require_once '../../helpers/helpers.php';
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
 
-                                            <a class="btn btn-warning">
+                                            <a class="btn btn-warning" href="<?php echo Route::url('editarProducto') . '?id=' . $prod['id'] ?>">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                         </td>
