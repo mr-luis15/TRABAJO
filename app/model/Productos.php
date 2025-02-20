@@ -11,6 +11,7 @@ class Producto {
     private $stock;
     private $categoria;
     private $descripcion;
+    private $estado;
     private $PDO;
 
 
@@ -46,6 +47,10 @@ class Producto {
         $this->descripcion = $descripcion;
     }
 
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
 
     public function getId() {
         return $this->id;
@@ -71,10 +76,20 @@ class Producto {
         return $this->descripcion;
     }
 
+    public function getEstado() {
+        return $this->estado;
+    }
+
+
+
+
+
+
+
 
     public function crear() {
 
-        $query = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria) VALUES (:nombre, :descripion, :precio, :stock, :categoria)";
+        $query = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria, estado) VALUES (:nombre, :descripcion, :precio, :stock, :categoria, :estado)";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':nombre', $this->nombre);
@@ -82,9 +97,16 @@ class Producto {
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':stock', $this->stock);
         $stmt->bindParam(':categoria', $this->categoria);
+        $stmt->bindParam(':estado', $this->estado);
 
         return $stmt->execute() ? true : false;
     }
+
+
+
+
+
+
 
     public function eliminar() {
 
@@ -120,6 +142,19 @@ class Producto {
         $stmt->execute();
 
         return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
+
+    }
+
+
+    public function existeProductoByNombre() {
+
+        $query = "SELECT id FROM productos WHERE nombre = :nombre";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0 ? true : false;
 
     }
 

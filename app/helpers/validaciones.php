@@ -153,7 +153,7 @@ function validarDatosProductos($data, $accion) {
 
     }
 
-    $camposRequeridos = ['nombre', 'descripcion', 'precio', 'stock', 'categoria'];
+    $camposRequeridos = ['nombre', 'descripcion', 'precio', 'stock', 'id_categoria', 'estado'];
     foreach ($camposRequeridos as $campo) {
         if (empty($data[$campo])) {
             return false;

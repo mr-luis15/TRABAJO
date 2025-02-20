@@ -23,6 +23,7 @@ function mostrarTelefono($tel)
 }
 
 
+
 function mostrarServicioRealzizado($estado) {
 
     return $estado == "Realizado"? "<b style='color: green'>".$estado."</b>" : "<b style='color: orange'>".$estado."</b>";

@@ -37,6 +37,7 @@ require_once '../../helpers/helpers.php';
                         <th>Precio</th>
                         <th>Stock</th>
                         <th>Categoria</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -61,9 +62,10 @@ require_once '../../helpers/helpers.php';
                                         <td><?php echo $prod['precio']; ?></td>
                                         <td><?php echo $prod['stock']; ?></td>
                                         <td><?php echo isNull($prod['categoria_nombre'], '<b style="color: red">No asignada</b>'); ?></td>
+                                        <td><?php echo $prod['estado']; ?></td>
 
                                         <td>
-                                            <a class="btn btn-danger">
+                                            <a class="btn btn-danger" onclick="eliminarProducto(<?php echo $prod['id']; ?>) ">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
 

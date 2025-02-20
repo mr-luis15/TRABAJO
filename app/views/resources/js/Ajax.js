@@ -554,6 +554,8 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
+                console.error('Error en la llamada AJAX:', error);  // Imprime el error si falla la llamada
+                console.log("Respuesta del servidor:", xhr.responseText);  // Agrega esto para ver la respuesta completa
                 error_servidor();
             }
 
@@ -574,7 +576,8 @@ $(document).ready(function () {
             descripcion: $('#descripcion').val(),
             stock: $('#stock').val(),
             precio: $('#precio').val(),
-            categoria: $('#categoria').val()
+            id_categoria: $('#id_categoria').val(),
+            estado: $('#estado').val()
         };
 
 
@@ -607,6 +610,47 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+// Función para eliminar usuario
+function eliminarProducto(id) {
+    Swal.fire({
+        title: "¿Seguro que quieres eliminar este producto?",
+        text: "No lo podrás recuperar y todos los pedidos y servicios relacionados a este usuario serán borrados.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, borrar",
+        cancelButtonText: "No"
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: controller('productos', 'eliminarProducto'),
+                type: 'POST',
+                data: { id: id },
+                dataType: 'json',
+                success: function (response) {
+
+                    const mensaje = response.message;
+
+                    if (response.status === 'success') {
+                        deleted(mensaje);
+                    }
+
+                    if (response.status === 'error') {
+                        error(mensaje);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    error_servidor(mensaje);
+                }
+            });
+        }
+    });
+}
 
 
 
