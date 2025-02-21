@@ -102,7 +102,7 @@ $(document).ready(function () {
 
                 if (response.status === 'success') {
                     Swal.fire({
-                        title: 'Modificaco',
+                        title: 'Modificado',
                         text: mensaje,
                         icon: "success",
                     }).then((result) => {

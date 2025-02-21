@@ -3,7 +3,7 @@
 session_start();
 
 if (empty($_GET['id'])) {
-    echo "No se recibió el ID";
+    echo "<script>alert('No se encontró el producto'); window.history.back();</script>";
     exit;
 }
 
@@ -22,10 +22,9 @@ $categoria = $categorias->obtenerCategorias();
 
 $productos = new Producto();
 $productos->setId($_GET['id']);
-$resultados = $productos->obtenerProductoById();
+$datos = $productos->obtenerProductoById();
 
 
-foreach ($resultados as $datos):
 
 ?>
     <div class="main">
@@ -145,7 +144,6 @@ foreach ($resultados as $datos):
 
 <?php
 
-endforeach;
 require_once '../resources/layout/footer.php';
 
 ?>

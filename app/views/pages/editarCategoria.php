@@ -5,7 +5,7 @@ session_start();
 
 if (!isset($_GET['id'])) {
 
-    echo "Error al recibir el ID";
+    echo "<script>alert('No se encontró la categoria'); window.history.back();</script>";
     exit;
 }
 
@@ -21,7 +21,7 @@ $categoria->setId($_GET['id']);
 
 if ($categoria->existeCategoriaById() === false) {
 
-    echo "Ha habido un error. No se encontró la categoria";
+    echo "<script>alert('No se encontró la categoria'); window.history.back();</script>";
     exit;
 }
 

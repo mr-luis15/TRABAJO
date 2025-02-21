@@ -26,6 +26,8 @@ $producto->setCategoria($_POST['id_categoria']);
 $producto->setEstado($_POST['estado']);
 
 
+//HACER UNA VALIDACION QUE MARQUE EL ESTADO COMO NO DISPONIBLE SI EL STOCK ES 0 Y RETORNARLO EN EL MENSAJE
+
 /*
 if ($producto->getPrecio() < 0 || $producto->getStock() < 0) {
     enviarRespuesta('error', 'El precio y el stock no pueden ser nagativos. El valor minimo es cero.');

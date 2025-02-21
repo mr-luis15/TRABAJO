@@ -50,30 +50,29 @@ if (!esTelefonoValido($usuario->telefono)) {
 }
 
 
-$resultado = $usuario->obtenerUsuarioById();
-foreach ($resultado as $datos) {
+$datos = $usuario->obtenerUsuarioById();
 
-    if ($_SESSION['usuario']['id'] === $datos['id_usuario']) {
-        enviarRespuesta('error', 'No puedes modificar tu propia cuenta');
+if ($_SESSION['usuario']['id'] === $datos['id_usuario']) {
+    enviarRespuesta('error', 'No puedes modificar tu propia cuenta');
+    exit;
+}
+
+
+if ($usuario->correo != $datos['correo']) {
+    if ($usuario->existeUsuarioByEmail()) {
+        enviarRespuesta('error', 'Ya hay un usuario con este correo');
         exit;
     }
+}
 
 
-    if ($usuario->correo != $datos['correo']) {
-        if ($usuario->existeUsuarioByEmail()) {
-            enviarRespuesta('error', 'Ya hay un usuario con este correo');
-            exit;
-        }
-    }
-
-
-    if ($usuario->telefono != $datos['telefono']) {
-        if ($usuario->existeTelefono()) {
-            enviarRespuesta('error', 'Este telefono ya esta registrado. Prueba con otro');
-            exit;
-        }
+if ($usuario->telefono != $datos['telefono']) {
+    if ($usuario->existeTelefono()) {
+        enviarRespuesta('error', 'Este telefono ya esta registrado. Prueba con otro');
+        exit;
     }
 }
+
 
 
 if (!$usuario->esNivelValido()) {

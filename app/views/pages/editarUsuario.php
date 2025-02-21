@@ -26,14 +26,14 @@ $usuario->setId($_GET['id']);
 
 if ($usuario->obtenerUsuarioById() == false) {
 
-    echo "Ha habido un error. No se encontró el usuario";
+    echo "<script>alert('No se encontró el usuario'); window.history.back();</script>";
     exit;
 }
 
 
-$resultado = $usuario->obtenerUsuarioById();
+$datos = $usuario->obtenerUsuarioById();
 
-foreach ($resultado as $datos):
+//foreach ($resultado as $datos):
 
 
 ?>
@@ -177,7 +177,7 @@ foreach ($resultado as $datos):
 <?php
 
 
-endforeach;
+//endforeach;
 require_once '../resources/layout/footer.php';
 
 

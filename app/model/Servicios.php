@@ -166,7 +166,7 @@ class Servicios
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
 
-        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
+        return $stmt->rowCount() > 0 ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
 
     }
 
