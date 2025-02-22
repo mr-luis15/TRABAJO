@@ -17,7 +17,7 @@ $categoria->setDescripcion($_POST['descripcion']);
 
 
 if (!$categoria->existeCategoriaById()) {
-    enviarRespuesta('erro', 'No existe una categoria con este ID');
+    enviarRespuesta('error', 'No existe una categoria con este ID');
     exit;
 }
 
