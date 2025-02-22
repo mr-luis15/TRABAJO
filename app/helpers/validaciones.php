@@ -12,7 +12,6 @@
 
 function enviarRespuesta($status, $mensaje)
 {
-
     header('Content-Type: application/json');
     echo json_encode(['status' => $status, 'message' => $mensaje]);
     exit;
@@ -47,7 +46,7 @@ function esTelefonoValido($numeros_telefono)
 /**
  * 
  * @param String $accion Es la accion que realizara la funcion para saber si veririficar el estado del id o el estado
- * 
+ * @param Array $data Son los datos recibidos mediante el metodo POST
  * 
  */
 
@@ -60,7 +59,7 @@ function validarDatosServicios($data, $accion)
         if (!isset($data['id']) || empty($data['id'])) {
             return false;
         }
-        
+
         if (!isset($data['estado']) || empty($data['estado'])) {
             return false;
         }
@@ -94,7 +93,6 @@ function validarDatosUsuario($data, $accion)
         if (!isset($data['password']) || empty($data['password'])) {
             return false;
         }
-
     }
 
     $camposRequeridos = ['nombre', 'correo', 'telefono', 'nivel', 'codigo'];
@@ -104,12 +102,13 @@ function validarDatosUsuario($data, $accion)
         }
     }
     return true;
-
-    
 }
 
 
-function validarDatosCliente($data) {
+
+
+function validarDatosCliente($data)
+{
 
     $camposRequeridos = ['nombre', 'correo', 'telefono', 'password', 'codigo'];
     foreach ($camposRequeridos as $campo) {
@@ -121,14 +120,17 @@ function validarDatosCliente($data) {
     return true;
 }
 
-function validarDatosCategoria($data, $accion) {
+
+
+
+function validarDatosCategoria($data, $accion)
+{
 
     if ($accion == 'editar') {
 
         if (!isset($data['id']) || empty($data['id']) || !is_numeric($data['id'])) {
             return false;
         }
-
     }
 
     $camposRequeridos = ['nombre', 'descripcion'];
@@ -139,10 +141,13 @@ function validarDatosCategoria($data, $accion) {
     }
 
     return true;
-
 }
 
-function validarDatosProductos($data, $accion) {
+
+
+
+function validarDatosProductos($data, $accion)
+{
 
     if ($accion == 'editar') {
         if (!isset($data['id']) || empty($data['id']) || !is_numeric($data['id'])) {
@@ -163,7 +168,9 @@ function validarDatosProductos($data, $accion) {
 
 
 
-function numeroProductosIsNull($numeroProductos) {
+
+function numeroProductosIsNull($numeroProductos)
+{
 
     if ($numeroProductos == NULL) {
 
@@ -171,5 +178,4 @@ function numeroProductosIsNull($numeroProductos) {
     }
 
     return $numeroProductos;
-
 }

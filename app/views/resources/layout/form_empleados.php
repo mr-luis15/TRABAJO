@@ -29,11 +29,11 @@
                             
                             <?php
 
-                                foreach ($codigos as $pais => $cod) {
+                                foreach ($codigos as $pais => $cod) :
 
                                     echo "<option value=" . $cod . "> " . $pais . ": " .$cod . " </option>";
 
-                                }
+                                endforeach;
 
                             ?>
 

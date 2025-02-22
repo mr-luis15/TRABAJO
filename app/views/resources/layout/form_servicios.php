@@ -24,9 +24,11 @@ $tecnicos = $usuario->obtenerTecnicos();
 
                         <?php
 
-                            foreach ($clientes as $cliente) {
+                            foreach ($clientes as $cliente) :
+                                
                                 echo "<option value=".$cliente['id_usuario'].">".$cliente['nombre']."</option>";
-                            }
+                            
+                            endforeach;
 
                         ?>
 
@@ -38,9 +40,11 @@ $tecnicos = $usuario->obtenerTecnicos();
 
                         <?php
 
-                            foreach ($tecnicos as $tecnico) {
+                            foreach ($tecnicos as $tecnico) :
+
                                 echo "<option value=".$tecnico['id_usuario'].">".$tecnico['nombre']."</option>";
-                            }
+                            
+                            endforeach;
 
                         ?>
 

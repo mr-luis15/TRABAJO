@@ -39,13 +39,17 @@ require_once '../../helpers/helpers.php';
                     </tr>
                 </thead>
                 <tbody>
+
                     <?php
+
                     $usuarios = new Usuario();
                     $listado = $usuarios->obtenerTecnicos();
 
-                    if ($listado) {
-                        foreach ($listado as $usuario) {
-                            ?>
+                    if ($listado != false) :
+
+                        foreach ($listado as $usuario) :
+
+                    ?>
                             <tr>
                                 <td><?php echo $usuario['id_usuario']; ?></td>
                                 <td><?php echo $usuario['nombre']; ?></td>
@@ -63,12 +67,19 @@ require_once '../../helpers/helpers.php';
                                     </a>
                                 </td>
                             </tr>
-                            <?php
-                        }
-                    } else {
+
+                    <?php
+
+                        endforeach;
+
+                    else :
+
                         echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                    }
+
+                    endif;
+
                     ?>
+                    
                 </tbody>
             </table>
         </div>

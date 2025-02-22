@@ -1,5 +1,6 @@
 <?php
 
+
 session_start();
 
 require_once '../resources/layout/head.php';
@@ -7,8 +8,8 @@ require_once '../resources/layout/menu.php';
 require_once '../../model/Productos.php';
 require_once '../../helpers/helpers.php';
 
-?>
 
+?>
 
 
 
@@ -53,9 +54,9 @@ require_once '../../helpers/helpers.php';
                     $resultado = $productos->obtenerProductos();
 
 
-                    if ($resultado != false) {
+                    if ($resultado != false) :
 
-                        foreach ($resultado as $prod) {
+                        foreach ($resultado as $prod):
 
                     ?>
                             <tr>
@@ -79,12 +80,14 @@ require_once '../../helpers/helpers.php';
                                 </td>
                             </tr>
                     <?php
-                    
-                        }
-                    } else {
+
+                        endforeach;
+
+                    else :
 
                         echo "<tr><td colspan='7' class='text-center'>No hay datos disponibles</td></tr>";
-                    }
+
+                    endif;
 
 
                     ?>
@@ -94,8 +97,6 @@ require_once '../../helpers/helpers.php';
         </div>
     </div>
 </div>
-
-
 
 
 

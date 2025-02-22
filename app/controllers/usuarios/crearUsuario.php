@@ -103,7 +103,6 @@ if ($usuario->existeTelefono()) {
 $usuario->passwordHash = password_hash($usuario->password, PASSWORD_BCRYPT);
 
 
-
 try {
 
     if ($usuario->crear()) {

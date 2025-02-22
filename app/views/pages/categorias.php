@@ -43,9 +43,9 @@ require_once '../../routes/RouteController.php';
                         $categoria = new Categorias();
                         $resultado = $categoria->obtenerCategorias();
 
-                        if ($resultado != NULL) {
+                        if ($resultado != NULL) :
 
-                            foreach ($resultado as $cat) {
+                            foreach ($resultado as $cat) :
 
                                 ?>
                                     <tr>
@@ -65,11 +65,13 @@ require_once '../../routes/RouteController.php';
                                     </tr>
                                 <?php
 
-                            }
-                        } else {
+                            endforeach;
+                            
+                        else :
 
                             echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                        }
+                        
+                        endif;
 
                         ?>
 

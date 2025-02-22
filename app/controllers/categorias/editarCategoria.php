@@ -4,10 +4,13 @@ require_once '../../model/Categorias.php';
 require_once '../../helpers/validaciones.php';
 
 
+
 if (!validarDatosCategoria($_POST, 'editar')) {
     enviarRespuesta('error', 'Este ID no es valido');
     exit;
 }
+
+
 
 $categoria = new Categorias();
 
@@ -16,10 +19,12 @@ $categoria->setNombre($_POST['nombre']);
 $categoria->setDescripcion($_POST['descripcion']);
 
 
+
 if (!$categoria->existeCategoriaById()) {
-    enviarRespuesta('erro', 'No existe una categoria con este ID');
+    enviarRespuesta('error', 'No existe una categoria con este ID');
     exit;
 }
+
 
 
 //Encontrar la forma de hacer que solo detecte el nombre repetido de otra categoria y no de la que se está modificando
@@ -37,8 +42,9 @@ foreach ($resultado as $datos) {
 }
 
 
+
 if (strlen($categoria->getDescripcion()) > 255) {
-    enviarRespuesta('erro', 'La descripcion debe tener menos de 255 caracteres');
+    enviarRespuesta('error', 'La descripcion debe tener menos de 255 caracteres');
     exit;
 }
 

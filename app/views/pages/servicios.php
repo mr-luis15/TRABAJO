@@ -65,11 +65,13 @@
                         <tbody>
 
                             <?php
+
                             $servicios = new Servicios();
                             $listado = $servicios->obtenerServiciosNoRealizados();
 
-                            if ($listado) {
-                                foreach ($listado as $servicio) {
+                            if ($listado != false) :
+
+                                foreach ($listado as $servicio) :
 
                                     ?>
                                     
@@ -105,10 +107,14 @@
 
                                     <?php
 
-                                }
-                            } else {
+                                endforeach;
+
+                            else :
+                                
                                 echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                            }
+                            
+                            endif;
+                            
                             ?>
 
                         </tbody>

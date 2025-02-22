@@ -33,10 +33,11 @@ $resultado = $categorias->obtenerCategorias();
 
                             <?php
 
-                            foreach ($resultado as $cat) {
+                            foreach ($resultado as $cat) :
 
                                 echo "<option value=" . $cat['id'] . "> " . $cat['nombre'] . " </option>";
-                            }
+                            
+                            endforeach;
 
                             ?>
 

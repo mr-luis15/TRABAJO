@@ -61,11 +61,14 @@ $datos = $usuario->obtenerUsuarioById();
 
                                         $codigos = obtenerCodigosPaises();
 
-                                        foreach ($codigos as $pais => $cod) {
+                                        foreach ($codigos as $pais => $cod) :
 
-                                            if ($cod != $datos['codigo_telefono'])
+                                            if ($cod != $datos['codigo_telefono']) :
                                                 echo "<option value='$cod'>$pais : $cod</option>";
-                                        }
+                                        
+                                            endif;
+
+                                        endforeach;
 
                                         ?>
 
@@ -117,11 +120,11 @@ $datos = $usuario->obtenerUsuarioById();
 
                                 if ($datos['nivel'] == 'Tecnico'):
 
-                                ?>
+                                    ?>
 
                                     <input type="hidden" name="nivel" id="nivel" value="Tecnico">
 
-                                <?php
+                                    <?php
 
                                 endif;
 

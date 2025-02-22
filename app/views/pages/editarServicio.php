@@ -58,11 +58,15 @@ if (!$service) {
 
                                     $clientes = $usuario->obtenerClientes();
 
-                                    foreach ($clientes as $cliente) {
+                                    foreach ($clientes as $cliente) :
 
-                                        if ($cliente['id_usuario'] != $service['id_cliente'])
+                                        if ($cliente['id_usuario'] != $service['id_cliente']) :
+
                                             echo "<option value=" . $cliente['id_usuario'] . ">" . $cliente['nombre'] . "</option>";
-                                    }
+
+                                        endif;
+                                    
+                                    endforeach;
 
                                     ?>
 
@@ -78,11 +82,15 @@ if (!$service) {
 
                                     $tecnicos = $usuario->obtenerTecnicos();
 
-                                    foreach ($tecnicos as $tecnico) {
+                                    foreach ($tecnicos as $tecnico) :
 
-                                        if ($tecnico['id_usuario'] != $service['id_tecnico'])
+                                        if ($tecnico['id_usuario'] != $service['id_tecnico']) :
+
                                             echo "<option value=" . $tecnico['id_usuario'] . ">" . $tecnico['nombre'] . "</option>";
-                                    }
+
+                                        endif;
+                                    
+                                    endforeach;
 
                                     ?>
 
@@ -103,15 +111,17 @@ if (!$service) {
 
                                     <?php
 
-                                    if ($service['estado'] == "Realizado") {
+                                    if ($service['estado'] == "Realizado") :
 
                                         echo "<option value=" . $service['estado'] . ">" . $service['estado'] . "</option>";
                                         echo "<option value='No realizado'>No realizado</option>";
-                                    } else {
+                                    
+                                    else :
 
                                         echo "<option value=\"" . htmlspecialchars($service['estado']) . "\">" . htmlspecialchars($service['estado']) . "</option>";
                                         echo "<option value='Realizado'>Realizado</option>";
-                                    }
+                                    
+                                    endif;
 
                                     ?>
 

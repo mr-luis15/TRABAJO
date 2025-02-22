@@ -68,8 +68,9 @@ require_once '../../helpers/helpers.php';
                         $servicios = new Servicios();
                         $listado = $servicios->obtenerServiciosRealizados();
 
-                        if ($listado) {
-                            foreach ($listado as $servicio) {
+                        if ($listado != false) :
+
+                            foreach ($listado as $servicio) :
 
                                 ?>
                                 
@@ -105,10 +106,14 @@ require_once '../../helpers/helpers.php';
 
                                 <?php
 
-                            }
-                        } else {
+                            endforeach;
+
+                        else :
+                            
                             echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                        }
+                        
+                        endif;
+
                         ?>
 
                     </tbody>
