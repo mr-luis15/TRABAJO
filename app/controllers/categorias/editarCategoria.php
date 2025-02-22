@@ -38,7 +38,7 @@ foreach ($resultado as $datos) {
 
 
 if (strlen($categoria->getDescripcion()) > 255) {
-    enviarRespuesta('erro', 'La descripcion debe tener menos de 255 caracteres');
+    enviarRespuesta('error', 'La descripcion debe tener menos de 255 caracteres');
     exit;
 }
 
