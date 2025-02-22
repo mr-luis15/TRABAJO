@@ -38,13 +38,18 @@ if (!$usuario->existeUsuarioById()) {
 }
 
 
-if ($usuario->eliminar()) {
+try {
 
-    enviarRespuesta('success', 'Usuario eliminado correctamente');
+    if ($usuario->eliminar()) {
+
+        enviarRespuesta('success', 'Se ha eliminado con exito');
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha eliminado el usuario. Hubo un error: ' . $e->getMessage());
     exit;
 
-} else {
-
-    enviarRespuesta('error', 'Hubo un error. No se eliminó el usuario');
-    exit;
 }

@@ -93,7 +93,7 @@
                                                 <i class="far fa-bookmark"></i>
                                             </a>
 
-                                            <a href="<?php echo Route::url('editarServicio') . '?id=' . $servicio['id_servicio'] ?>" class="btn btn-warning">
+                                            <a href="editarServicio.php?id=<?php echo $servicio['id_servicio']; ?>" class="btn btn-warning">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
 

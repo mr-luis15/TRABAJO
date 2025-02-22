@@ -63,7 +63,7 @@ require_once '../../helpers/helpers.php';
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
 
-                                    <a href="<?= htmlspecialchars(Route::url('editarUsuario') . '?id=' . $usuario['id_usuario']) ?>" class="btn btn-warning">
+                                    <a href="editarUsuario.php?id=<?php echo $usuario['id_usuario']; ?>" class="btn btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </td>

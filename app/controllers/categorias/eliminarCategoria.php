@@ -19,18 +19,27 @@ if (!is_numeric($cat->getId())) {
     exit;
 }
 
+
 if (!$cat->existeCategoriaById()) {
     enviarRespuesta('error', 'No existe una categoria con este ID');
     exit;
 }
 
-if ($cat->eliminar()) {
-    enviarRespuesta('success', 'Se ha eliminado la categoria con exito');
-    exit;
-}
 
-enviarRespuesta('error', 'Hubo un error. No se eliminó la categoria');
-exit;
+try {
+
+    if ($cat->eliminar()) {
+        enviarRespuesta('success', 'Se ha eliminado la categoria ' . $cat->getNombre());
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha eliminado. Hubo un error: ');
+    exit;
+
+}
 
 
 

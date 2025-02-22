@@ -5,9 +5,9 @@ require_once '../../model/Categorias.php';
 require_once '../../helpers/validaciones.php';
 
 
+// Validar que los datos sean correctos antes de proceder
 if (!validarDatosProductos($_POST, 'crear')) {
-
-    enviarRespuesta('error', 'No se han recibido los datos');
+    enviarRespuesta('error', 'No se han recibido los datos correctamente.');
     exit;
 }
 
@@ -15,54 +15,48 @@ if (!validarDatosProductos($_POST, 'crear')) {
 $producto = new Producto();
 $categoria = new Categorias();
 
-$categoria->setId($_POST['id_categoria']);
 
+$categoria->setId($_POST['id_categoria']);
 $producto->setId($_POST['id']);
 $producto->setNombre($_POST['nombre']);
 $producto->setDescripcion($_POST['descripcion']);
 $producto->setStock($_POST['stock']);
 $producto->setPrecio($_POST['precio']);
 $producto->setCategoria($_POST['id_categoria']);
-$producto->setEstado($_POST['estado']);
 
 
-//HACER UNA VALIDACION QUE MARQUE EL ESTADO COMO NO DISPONIBLE SI EL STOCK ES 0 Y RETORNARLO EN EL MENSAJE
-
-/*
 if ($producto->getPrecio() < 0 || $producto->getStock() < 0) {
-    enviarRespuesta('error', 'El precio y el stock no pueden ser nagativos. El valor minimo es cero.');
+    enviarRespuesta('error', 'El precio y el stock no pueden ser negativos. El valor mínimo es cero.');
     exit;   
 }
 
 
-if ($producto->getStock() == 0) {
-    $producto->setEstado('No disponible');
-}
-    */
+$estado = ($producto->getStock() == 0) ? 'No disponible' : 'Disponible';
+$producto->setEstado($estado);
 
 
+// Verificar si la categoría existe
 if (!$categoria->existeCategoriaById()) {
-
-    enviarRespuesta('error', 'Esta categoria no existe');
+    enviarRespuesta('error', 'La categoría seleccionada no existe.');
     exit;
 }
 
 
 if ($producto->existeProductoByNombre()) {
-
-    enviarRespuesta('error', 'Ya hay un producto con este nombre. Tienes que usar otro');
+    enviarRespuesta('error', 'Ya existe un producto con este nombre. Debes elegir otro.');
     exit;
 }
 
 
-if ($producto->crear()) {
-    
-    enviarRespuesta('success', 'Se ha agregado con exito');
-    exit;
+try {
 
-} else {
+    if ($producto->crear()) {
+        enviarRespuesta('success', 'El producto se ha agregado con éxito.');
+        exit;
+    }
 
-    error_log("Error al modificar el servicio: " . json_encode($servicio));
-    enviarRespuesta('error', 'No se ha agregado el producto');
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'Se ha producido un error: ' . $e->getMessage());
     exit;
 }

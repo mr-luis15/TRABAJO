@@ -43,16 +43,22 @@ if (strlen($categoria->getDescripcion()) > 255) {
 }
 
 
-if ($categoria->editar()) {
-    enviarRespuesta('success', 'Se ha modificado la categoria ' . $categoria->getNombre());
-    exit;
 
-} else {
+try {
 
-    enviarRespuesta('error', 'No se ha modificado. Hubo un error');
+    if ($categoria->editar()) {
+        enviarRespuesta('success', 'Se ha modificado la categoria ' . $categoria->getNombre());
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha modificado. Hubo un error: ' . $e->getMessage());
     exit;
 
 }
+
 
 
 

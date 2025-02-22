@@ -58,9 +58,9 @@ require_once '../../routes/RouteController.php';
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
 
-                                            <a class="btn btn-warning" href="<?php echo Route::url('editarCategoria') . '?id=' . $cat['id'] ?>">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
+                                            <a href="editarCategoria.php?id=<?php echo $cat['id']; ?>" class="btn btn-warning">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
                                         </td>
                                     </tr>
                                 <?php

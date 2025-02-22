@@ -25,10 +25,20 @@ $producto->setCategoria($_POST['id_categoria']);
 
 //HACER UNA VALIDACION QUE MARQUE EL ESTADO COMO NO DISPONIBLE SI EL STOCK ES 0 Y RETORNARLO EN EL MENSAJE
 
+if ($producto->getPrecio() < 0 || $producto->getStock() < 0) {
+    enviarRespuesta('error', 'El precio y el stock no pueden ser negativos. El valor mínimo es cero.');
+    exit;   
+}
+
+
+$estado = ($producto->getStock() == 0) ? 'No disponible' : 'Disponible';
+$producto->setEstado($estado);
+
+
 
 $resultado = $producto->obtenerProductoById();
 
-
+//Verificamos si el nombre a modificar es igual al del mismo producto
 if ($resultado['nombre'] != $producto->getNombre()) {
     if ($producto->existeProductoByNombre()) {
         enviarRespuesta('error', 'Ya hay un producto con este nombre');
@@ -36,11 +46,20 @@ if ($resultado['nombre'] != $producto->getNombre()) {
 }
 
 
-if ($producto->editar()) {
-    enviarRespuesta('success', 'Se ha modificado con exito');
+
+try {
+
+    if ($producto->editar()) {
+        enviarRespuesta('success', 'Se ha modificado con exito');
+        exit;
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha modificado. Hubo un error : ' . $e->getMessage());
     exit;
+
 }
 
-enviarRespuesta('error', 'No se ha modificado. Hubo un error');
 
 ?>

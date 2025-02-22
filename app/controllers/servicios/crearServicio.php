@@ -39,9 +39,18 @@ if (strlen($servicio->getDescripcion()) > 255) {
 }
 
 
-if ($servicio->crear()) {
-    enviarRespuesta('success', 'Se ha agregado un nuevo servicio');
-    exit;
-}
+try {
 
-enviarRespuesta('error', 'No se ha agregado el servicio');
+    if ($servicio->crear()) {
+
+        enviarRespuesta('success', 'Se ha agregaod un vuevo servicio');
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha agregado. Hubo un error: ' . $e->getMessage());
+    exit;
+
+}

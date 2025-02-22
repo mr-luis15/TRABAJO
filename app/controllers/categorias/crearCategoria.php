@@ -27,20 +27,23 @@ if ($cat->existeCategoriaByNombre()) {
     exit;
 }
 
-if ($cat->crear()) {
 
-    enviarRespuesta('success', 'La categoria ' . $cat->getNombre() . ' se ha agragado con exito.');
-    exit;
 
-} else {
+try {
 
-    enviarRespuesta('error', 'Ha habido un error. No se  ha agregado');
+    if ($cat->crear()) {
+
+        enviarRespuesta('success', 'La categoria ' . $cat->getNombre() . ' se ha agragado con exito.');
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'Ha habido un error. No se  ha agregado. Error: ' . $e->getMessage());
     exit;
 
 }
-
-
-
 
 
 

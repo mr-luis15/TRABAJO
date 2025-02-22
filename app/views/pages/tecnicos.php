@@ -3,13 +3,13 @@
 session_start();
 
 $title = "Tecnicos";
-require_once '../../routes/RouteController.php';
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
 require_once '../../model/Usuario.php';
 require_once '../../helpers/helpers.php';
 
 ?>
+
 <div class="main">
     <h2 class="h2">Lista de Tecnicos</h2>
     <hr>
@@ -58,7 +58,7 @@ require_once '../../helpers/helpers.php';
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
 
-                                    <a href="<?= htmlspecialchars(Route::url('editarUsuario') . '?id=' . $usuario['id_usuario']) ?>" class="btn btn-warning">
+                                    <a href="editarUsuario.php?id=<?php echo $usuario['id_usuario']; ?>" class="btn btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </td>

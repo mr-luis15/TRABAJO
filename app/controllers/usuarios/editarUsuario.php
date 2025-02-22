@@ -81,10 +81,19 @@ if (!$usuario->esNivelValido()) {
 }
 
 
-if ($usuario->editar()) {
+try {
 
-    echo json_encode(['status' => 'success', 'nivel' => $usuario->nivel, 'message' => 'El usuario ' . $usuario->nombre . ' se ha modificado con exito']);
+    if ($usuario->editar()) {
+
+        echo json_encode(['status' => 'success', 'nivel' => $usuario->nivel, 'message' => 'El usuario ' . $usuario->nombre . ' se ha modificado con exito']);
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha modificado. Hubo un error: ' . $e->getMessage());
     exit;
-} else {
-    enviarRespuesta('success', 'Ha habido un error. No se  modificó el usuario');
+
 }
+

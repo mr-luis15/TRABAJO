@@ -56,13 +56,23 @@ if ($usuario->existeTelefono()) {
 $usuario->passwordHash = password_hash($usuario->password, PASSWORD_BCRYPT);
 
 
-if (!$usuario->crear()) {
-    enviarRespuesta('error', 'Ha habido un error al crear el usuario');
+
+try {
+
+    if ($usuario->crear()) {
+
+        enviarRespuesta('success', 'Te has registrado con exito');
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha registrar. Hubo un error: ' . $e->getMessage());
     exit;
+
 }
 
-
-enviarRespuesta('success', 'Te has registrado con exito');
 
 
 ?>

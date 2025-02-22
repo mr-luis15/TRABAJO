@@ -13,12 +13,21 @@ $servicio = new Servicios();
 $servicio->setId($_POST['id']);
 
 
-if ($servicio->eliminar()) {
-    echo json_encode(['status' => 'success', 'title' => 'ELiminado', 'message' => 'Se ha eliminado el servicio']);
+
+try {
+
+    if ($servicio->eliminar()) {
+
+        echo json_encode(['status' => 'success', 'title' => 'ELiminado', 'message' => 'Se ha eliminado el servicio']);
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha eliminado. Hubo un error: ' . $e->getMessage());
     exit;
-} else {
-    enviarRespuesta('error', 'No se ha eliminado. Hubo un error');
-    exit;
+
 }
 
 

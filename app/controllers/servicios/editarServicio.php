@@ -70,17 +70,24 @@ if (!$usuario->existeClienteById($servicio->getCliente())) {
 }
 
 
-if ($servicio->editar()) {
 
-    enviarRespuesta('success', 'Se modificó con exito');
+try {
+
+    if ($servicio->editar()) {
+
+        enviarRespuesta('success', 'El servicio se ha modificado con exito');
+        exit;
+    
+    }
+
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha modificaro. Hubo un error: ' . $e->getMessage());
     exit;
 
-} else {
-
-    error_log("Error al modificar el servicio: " . json_encode($servicio));
-    enviarRespuesta('error', 'Error al modificar el servicio');
-    exit;
 }
+
+
 
 
 

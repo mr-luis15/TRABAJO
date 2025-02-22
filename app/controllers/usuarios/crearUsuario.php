@@ -104,15 +104,19 @@ $usuario->passwordHash = password_hash($usuario->password, PASSWORD_BCRYPT);
 
 
 
+try {
 
-if (!$usuario->crear()) {
+    if ($usuario->crear()) {
+        enviarRespuesta('success', 'Se ha creado el usuario ' . $usuario->nombre);
+        exit;
+    
+    }
 
-    enviarRespuesta('error', 'Ha habido un error. El usuario no se ha creado');
+} catch (Exception $e) {
+
+    enviarRespuesta('error', 'No se ha creado el usuario. Hubo un error: ' . $e->getMessage());
     exit;
-} else {
 
-    enviarRespuesta('success', 'Agregado con exito');
-    exit;
 }
 
 
