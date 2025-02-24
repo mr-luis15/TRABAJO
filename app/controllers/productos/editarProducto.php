@@ -31,6 +31,8 @@ if ($producto->getPrecio() < 0 || $producto->getStock() < 0) {
 }
 
 
+
+
 $estado = ($producto->getStock() == 0) ? 'No disponible' : 'Disponible';
 $producto->setEstado($estado);
 

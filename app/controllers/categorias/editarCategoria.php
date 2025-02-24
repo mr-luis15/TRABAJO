@@ -29,16 +29,13 @@ if (!$categoria->existeCategoriaById()) {
 
 //Encontrar la forma de hacer que solo detecte el nombre repetido de otra categoria y no de la que se está modificando
 $resultado = $categoria->obtenerCategoriaById();
-foreach ($resultado as $datos) {
 
-    if ($categoria->getNombre() != $datos['nombre']) {
+if ($categoria->getNombre() != $resultado['nombre']) {
 
-        if ($categoria->existeCategoriaByNombre()) {
-            enviarRespuesta('error', 'Ya hay una categoria con este nombre. Usa otro Porfavor');
-            exit;
-        }
+    if ($categoria->existeCategoriaByNombre()) {
+        enviarRespuesta('error', 'Ya hay una categoria con este nombre. Usa otro Porfavor');
+        exit;
     }
-
 }
 
 

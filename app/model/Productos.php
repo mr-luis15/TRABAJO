@@ -121,7 +121,7 @@ class Producto {
 
     public function editar() {
 
-        $query = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, stock = :stock, categoria = :categoria WHERE id = :id";
+        $query = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, stock = :stock, estado = :estado, categoria = :categoria WHERE id = :id";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':id', $this->id);
@@ -129,6 +129,7 @@ class Producto {
         $stmt->bindParam(':descripcion', $this->descripcion);
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':stock', $this->stock);
+        $stmt->bindParam(':estado', $this->estado);
         $stmt->bindParam(':categoria', $this->categoria);
 
         return $stmt->execute() ? true : false;
