@@ -742,7 +742,7 @@ function redirigirPorNivel(nivel) {
             break;
 
         case 'Cliente':
-            window.location.href = 'vistaCliente.php';
+            window.location.href = 'cliente.php';
             break;
     }
 }

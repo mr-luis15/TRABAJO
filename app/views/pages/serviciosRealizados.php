@@ -85,7 +85,7 @@ require_once '../../helpers/helpers.php';
 
                                     <td><?php echo $servicio['descripcion']; ?></td>
 
-                                    <td><?php echo mostrarServicioRealzizado($servicio['estado']); ?></td>
+                                    <td><?php echo mostrarEstado($servicio['estado']); ?></td>
 
                                     <td><?php echo $servicio['fecha_servicio']; ?></td>
 
