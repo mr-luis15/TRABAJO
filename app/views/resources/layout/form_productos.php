@@ -64,7 +64,7 @@ $resultado = $categorias->obtenerCategorias();
                     </div>
 
                     <div class="form-group">
-                        <label for="foto" class="form-label">Agregar una imagen</label>
+                        <label for="foto" class="form-label">Agregar una imagen (No es obligatorio)</label>
                         <input class="form-control" type="file" id="foto" name="foto">
                     </div>
 

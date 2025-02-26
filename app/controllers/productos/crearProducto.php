@@ -57,13 +57,12 @@ if ($producto->existeProductoByNombre()) {
 
 //AQUI HAREMOS LA LOGICA DE LAS IMAGENES Y LAS RUTAS
 
-//$upload_dir = "../../views/uploaded_images";
-
 $nombreImagen = $_FILES['foto']['name'];
 $tipoImagen = $_FILES['foto']['type'];
 $tmp_name = $_FILES['foto']['tmp_name'];
 
-if (empty($nombreImagen)) {
+
+if (!empty($nombreImagen)) {
 
     $tipos_permitidos = array('image/jpg', 'image/png', 'image/jpeg');
 
@@ -77,16 +76,18 @@ if (empty($nombreImagen)) {
 
 
     if (!move_uploaded_file($tmp_name, $destino)) {
+
+
         $error = error_get_last();
         enviarRespuesta('error', 'No se pudo mover la imagen al directorio destino. Error: ' . $error['message']);
     }
 
-
     $rutaImagen = "../uploaded_images/" . $nombreImagen;
     $producto->setImage($rutaImagen);
+
 } else {
 
-    $producto->setImage(NULL);
+    $producto->setImage('../uploaded_images/default.jpg');
 }
 
 

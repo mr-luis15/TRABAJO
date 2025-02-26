@@ -3,7 +3,7 @@
 session_start();
 
 require_once '../../routes/RouteController.php';
-nivelesPermitidos(['Admministrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
+nivelesPermitidos(['Administrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
 
 
 
@@ -55,7 +55,7 @@ require_once '../../helpers/helpers.php';
 
                     $productos = new Producto();
                     $resultado = $productos->obtenerProductos();
-                    $img_dir = "../uploaded_images/";
+                    $dir = "../uploaded_images/";
 
                     if ($resultado != false) :
 
@@ -70,7 +70,7 @@ require_once '../../helpers/helpers.php';
                                 <td><?php echo "$" . $prod['precio']; ?></td>
                                 <td><?php echo $prod['stock']; ?></td>
                                 <td><?php echo isNull($prod['categoria_nombre'], '<b>Categoria no asignada</b>'); ?></td>
-                                <td><?php echo isNull($prod['img_producto'], '<img class="rounded" loading="lazy" src="' . $img_dir . 'default.jpg">') ?></td>
+                                <td><?php echo "<img class='rounded' loading='lazy' src='".isNull($prod['img_producto'], $dir . 'default.jpg')."'>" ?></td>
                                 <td><?php echo mostrarEstado($prod['estado']); ?></td>
 
                                 <td>

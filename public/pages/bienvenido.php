@@ -23,7 +23,7 @@ require_once '../../app/helpers/helpers.php';
 
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="../../app/views/uploaded_images/default.jpg" class="card-img-top">
+                    <img src="../../app/views/uploaded_images/<?php echo isNull(basename($producto['img_producto']), 'default.jpg'); ?>" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $producto['nombre']; ?></h5>
                         <p class="card-text"><?php echo $producto['descripcion']; ?></p>

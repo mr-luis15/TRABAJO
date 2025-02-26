@@ -5,7 +5,7 @@
 session_start();
 
 require_once '../../routes/RouteController.php';
-nivelesPermitidos(['Admministrador']);
+nivelesPermitidos(['Administrador']);
 
 
 
@@ -18,8 +18,8 @@ if (!isset($_GET['id'])) {
 
 }
 
-$title = "Modificar Usuario";
 
+$title = "Modificar Usuario";
 require_once '../../model/Usuario.php';
 require_once '../../helpers/helpers.php';
 require_once '../resources/layout/head.php';
