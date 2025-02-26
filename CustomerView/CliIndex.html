@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            background-color: #2f74c8;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            position: fixed;
+        }
+
+        .sidebar img {
+            width: 80%;
+            margin: 0 auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #1e5aa4;
+        }
+
+        .sidebar ul li i {
+            width: 30px;
+        }
+
+        .logout {
+            margin-top: auto;
+            background-color: #d04141;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout:hover {
+            background-color: #b83434;
+        }
+
+        /* Contenido */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        /* Colores de tarjetas */
+        .card:nth-child(1) { background-color: #2f74c8; }
+        .card:nth-child(2) { background-color: #d04141; }
+        .card:nth-child(3) { background-color: #5a2fc8; }
+        .card:nth-child(4) { background-color: #2fc87a; }
+        .card:nth-child(5) { background-color: #2fc8a2; }
+        .card:nth-child(6) { background-color: #c87a2f; }
+        .card:nth-child(7) { background-color: #c82f7a; }
+        .card:nth-child(8) { background-color: #c8a22f; }
+
+        .card:hover {
+            opacity: 0.8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="logo.png" alt="Logo">
+        <ul>
+            <li><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+            <li><i class="fas fa-users"></i> Empleados</li>
+            <li><i class="fas fa-tools"></i> Técnicos</li>
+            <li><i class="fas fa-user"></i> Clientes</li>
+            <li><i class="fas fa-box"></i> Productos</li>
+            <li><i class="fas fa-list"></i> Categorías</li>
+            <li><i class="fas fa-truck"></i> Pedidos</li>
+            <li><i class="fas fa-cogs"></i> Servicios</li>
+        </ul>
+        <div class="logout"><i class="fas fa-sign-out-alt"></i> Salir</div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <h1>Dashboard</h1>
+        <p>Bienvenid@ Administrador</p>
+
+        <!-- Tarjetas -->
+        <div class="cards">
+            <div class="card"><i class="fas fa-users"></i> Clientes</div>
+            <div class="card"><i class="fas fa-shopping-cart"></i> Productos</div>
+            <div class="card"><i class="fas fa-truck"></i> Pedidos</div>
+            <div class="card"><i class="fas fa-calendar-alt"></i> Servicios</div>
+            <div class="card"><i class="fas fa-user-tie"></i> Empleados</div>
+            <div class="card"><i class="fas fa-sitemap"></i> Categoría</div>
+            <div class="card"><i class="fas fa-cogs"></i> Técnicos</div>
+            <div class="card"><i class="fas fa-boxes"></i> Inventario</div>
+        </div>
+    </div>
+
+</body>
+</html>

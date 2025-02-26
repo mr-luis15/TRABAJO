@@ -39,7 +39,8 @@ $(document).ready(function () {
                             break;
 
                         case 'Cliente':
-                            window.location.href = 'cliente.php';
+                            //window.location.href = '/Clima%20Polar/TRABAJO-modificaciones/CustomerView/CliBoard.php';
+                            window.location.href = '../../../CustomerView/CliBoard.php';
                             break;
                     }
                 }
