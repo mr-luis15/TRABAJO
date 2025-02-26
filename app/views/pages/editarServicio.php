@@ -4,6 +4,13 @@
 
 session_start();
 
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Admministrador', 'Tecnico']);
+
+
+
+
+
 if (!isset($_GET['id'])) {
 
     echo "Error al recibir el ID";

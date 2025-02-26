@@ -2,10 +2,9 @@
 
 session_start();
 
-if (empty($_GET['id'])) {
-    echo "<script>alert('No se encontró el producto'); window.history.back();</script>";
-    exit;
-}
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Admministrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
+
 
 
 require_once '../../model/Categorias.php';

@@ -2,16 +2,9 @@
 
 session_start();
 
-
-if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nivel'] != 'Administrador') {
-
-    echo json_encode(['status' => 'error', 'message' => 'No tienes permiso para realizar esta acción']);
-    exit;
-}
-
-
 require_once '../../model/Usuario.php';
 require_once '../../helpers/validaciones.php';
+
 
 if (empty($_POST['id'])) {
 
@@ -29,6 +22,9 @@ if ($_SESSION['usuario']['id'] == $usuario->getId()) {
     enviarRespuesta('error', 'No puedes eliminar tu propia cuenta');
     exit;
 }
+
+
+//HACER UNA CONDICIONAL PARA ASEGURARNOS DE QUE SI SOLO HAY 1 ADMINISTRADOR, NO SE PUEDA
 
 
 if (!$usuario->existeUsuarioById()) {

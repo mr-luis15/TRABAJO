@@ -5,8 +5,7 @@
 session_start();
 
 require_once '../../routes/RouteController.php';
-
-nivelesPermitidos(['Administrador', 'Secretaria de Compas', 'Secretaria de Ventas', 'Tecnico']);
+nivelesPermitidos(['Administrador', 'Secretaria de Compras', 'Secretaria de Ventas', 'Tecnico']);
 
 
 

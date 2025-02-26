@@ -32,6 +32,11 @@ if ($producto->getPrecio() < 0 || $producto->getStock() < 0) {
 }
 
 
+if (!is_numeric($producto->getPrecio()) || !is_numeric($producto->getStock())) {
+    enviarRespuesta('error', 'Tanto el precio como el stoc deben ser valores numericos');
+    exit;
+}
+
 
 $estado = ($producto->getStock() == 0) ? 'No disponible' : 'Disponible';
 $producto->setEstado($estado);
@@ -52,43 +57,37 @@ if ($producto->existeProductoByNombre()) {
 
 //AQUI HAREMOS LA LOGICA DE LAS IMAGENES Y LAS RUTAS
 
-$upload_dir = "../../views/uploaded_images";
+//$upload_dir = "../../views/uploaded_images";
 
+$nombreImagen = $_FILES['foto']['name'];
+$tipoImagen = $_FILES['foto']['type'];
+$tmp_name = $_FILES['foto']['tmp_name'];
 
+if (empty($nombreImagen)) {
 
-// Verifica si se ha cargado un archivo
-if (isset($_FILES['foto']) && !empty($_FILES['foto']['name'])) {
-    $file = $_FILES['foto'];
-    $tipo_imagen = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-    $tipos_permitidos = ['jpg', 'jpeg', 'png'];
+    $tipos_permitidos = array('image/jpg', 'image/png', 'image/jpeg');
 
-    // Verifica si el tipo de archivo es permitido
-    if (in_array($tipo_imagen, $tipos_permitidos)) {
-        $new_file_name = "../uploaded_images/" . $producto->getNombre() . "_img." . $file_type;
-        $file_path = $upload_dir . "/" . $new_file_name;
-
-        // Mueve el archivo a la carpeta de destino
-        if (move_uploaded_file($file['tmp_name'], $file_path)) {
-            $producto->setImage($new_file_name); // Guarda el nombre de la imagen
-        } else {
-            enviarRespuesta('error', 'Error al subir la imagen: ' . $file['name']);
-            exit;
-        }
-    } else {
-        enviarRespuesta('error', 'Tipo de archivo no permitido: ' . $file['name']);
+    if (!in_array($tipoImagen, $tipos_permitidos)) {
+        enviarRespuesta('error', 'No es una imagen del tipo aceptado');
         exit;
     }
+
+
+    $destino = "../../views/uploaded_images/" . basename($nombreImagen);
+
+
+    if (!move_uploaded_file($tmp_name, $destino)) {
+        $error = error_get_last();
+        enviarRespuesta('error', 'No se pudo mover la imagen al directorio destino. Error: ' . $error['message']);
+    }
+
+
+    $rutaImagen = "../uploaded_images/" . $nombreImagen;
+    $producto->setImage($rutaImagen);
 } else {
-    // Si no se subió una imagen, puedes asignar un valor predeterminado o no hacer nada.
-    $producto->setImage('uploaded_images/default.jpg'); // Imagen predeterminada si no se sube ninguna
+
+    $producto->setImage(NULL);
 }
-
-
-
-
-
-
-
 
 
 

@@ -56,7 +56,7 @@ $resultado = $categorias->obtenerCategorias();
 
                     <div class="form-group">
                         <label for="precio" class="col-form-label">Precio:</label>
-                        <input type="number" class="form-control" name="precio" id="precio" required>
+                        <input type="number" class="form-control" name="precio" step="0.01" id="precio" required>
                     </div>
                     <div class="form-group">
                         <label for="stock" class="col-form-label">Stock:</label>

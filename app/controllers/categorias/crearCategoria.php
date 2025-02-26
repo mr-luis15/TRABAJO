@@ -1,10 +1,6 @@
 <?php
 
 
-
-session_start();
-
-
 require_once '../../model/Categorias.php';
 require_once '../../helpers/validaciones.php';
 

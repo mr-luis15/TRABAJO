@@ -2,6 +2,11 @@
 
 session_start();
 
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador']);
+
+
+
 $title = "Tecnicos";
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';

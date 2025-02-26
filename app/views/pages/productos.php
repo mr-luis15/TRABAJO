@@ -1,7 +1,11 @@
 <?php
 
-
 session_start();
+
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Admministrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
+
+
 
 $title = "Vista de Productos";
 require_once '../resources/layout/head.php';
@@ -18,10 +22,8 @@ require_once '../../helpers/helpers.php';
     <h2 class="h2">Lista de Productos</h2>
     <hr>
     <div class="card">
-
-
-
         <div class="recuadro-button">
+            
             <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalProductos">
                 <i class="fas fa-cart-plus"></i> Agregar producto
             </button>
@@ -29,9 +31,8 @@ require_once '../../helpers/helpers.php';
             <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalProductos">
                 <i class="fas fa-user-plus"></i> Productos no disponibles
             </button>
+        
         </div>
-
-
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>

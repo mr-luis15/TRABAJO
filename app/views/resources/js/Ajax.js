@@ -18,26 +18,26 @@ $(document).ready(function () {
                 const mensaje = response.message;
 
                 if (response.status == 'success') {
-                    
+
                     const nivel = response.nivel;
 
                     switch (nivel) {
                         case 'Administrador':
                             window.location.href = 'dashboard.php';
                             break;
-                
+
                         case 'Secretaria de Compras':
                             window.location.href = 'dashboard.php';
                             break;
-                
+
                         case 'Secretaria de Ventas':
                             window.location.href = 'dashboard.php';
                             break;
-                
+
                         case 'Tecnico':
                             window.location.href = 'dashboard.php';
                             break;
-                
+
                         case 'Cliente':
                             window.location.href = 'cliente.php';
                             break;
@@ -245,36 +245,40 @@ $(document).ready(function () {
  * 
  */
 
-
-
 $(document).ready(function () {
     $('#agregar_producto').on('click', function () {
+        var formData = new FormData();
 
-        var data = {
+        // Agregar datos del producto
+        formData.append('nombre', $('#nombre').val());
+        formData.append('descripcion', $('#descripcion').val());
+        formData.append('stock', $('#stock').val());
+        formData.append('precio', $('#precio').val());
+        formData.append('id_categoria', $('#id_categoria').val());
+        formData.append('estado', $('#estado').val());
 
-            nombre: $('#nombre').val(),
-            descripcion: $('#descripcion').val(),
-            stock: $('#stock').val(),
-            precio: $('#precio').val(),
-            id_categoria: $('#id_categoria').val(),
-            estado: $('#estado').val()
-        };
+        // Obtener el archivo seleccionado
+        var archivo = $('#foto')[0].files[0];
+        if (archivo) {
+            formData.append('foto', archivo);
+        }
 
-
-        //console.log(data);
+        // Imprimir los datos de formData
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ':', pair[1]);
+        }
 
         $.ajax({
             url: controller('productos', 'crearProducto'),
             type: 'POST',
-            data: data,
+            data: formData,
             dataType: 'json',
+            processData: false, // Evita que jQuery convierta el FormData en un string
+            contentType: false, // Evita que jQuery agregue encabezados incorrectos
             success: function (response) {
-
                 const mensaje = response.message;
-
                 if (response.status === 'success') {
-                    agregado(mensaje)
-
+                    agregado(mensaje);
                 } else if (response.status === 'error') {
                     Swal.fire({
                         title: "Error",
@@ -286,7 +290,6 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 error_servidor();
             }
-
         });
     });
 });
@@ -769,7 +772,7 @@ $(document).ready(function () {
                     }).then(() => {
                         window.location.href = 'categorias.php';
                     });
-                    
+
 
                 } else if (response.status === 'error') {
                     Swal.fire({

@@ -1,7 +1,12 @@
 <?php
 
-
 session_start();
+
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Admministrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
+
+
+
 
 if (!isset($_GET['id'])) {
 

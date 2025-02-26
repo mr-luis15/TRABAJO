@@ -1,13 +1,20 @@
 <?php
 
-// Intentar hacer una funcion donde mandemos los niveles de usuario permitidos en cada vista y recorrerlos para saver si esta dentro
+/**
+ * 
+ * @param Array $niveles Este array contiene los niveles de usuario que estan permitidos en cada vista
+ * @return Class Si no está definido el nivel de usuario o no se encuentra en los niveles permitidos
+ *               retorna una funcion estatica que redirige a un mensaje de Error
+ * 
+ */
+
 function nivelesPermitidos($niveles)
 {
 
     $nivel = $_SESSION['usuario']['nivel'] ?? null;
 
     if (!$nivel || !in_array($nivel, $niveles)) {
-        return Route::msg('Error');
+        Route::msg('Error');
         exit;
     }
 }
