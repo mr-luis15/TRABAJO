@@ -9,10 +9,11 @@ nivelesPermitidos(['Administrador', 'Secretaria de Compras', 'Secretaria de Vent
 
 
 
-
 $title = "Dashboard | Vista Principal";
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
+
+
 
 
 switch ($_SESSION['usuario']['nivel']) {

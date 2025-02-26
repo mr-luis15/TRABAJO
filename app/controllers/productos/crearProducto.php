@@ -5,7 +5,7 @@ require_once '../../model/Categorias.php';
 require_once '../../helpers/validaciones.php';
 
 
-// Validar que los datos sean correctos antes de proceder
+
 if (!validarDatosProductos($_POST, 'crear')) {
     enviarRespuesta('error', 'No se han recibido los datos correctamente.');
     exit;
@@ -55,15 +55,19 @@ if ($producto->existeProductoByNombre()) {
 }
 
 
+
+
 //AQUI HAREMOS LA LOGICA DE LAS IMAGENES Y LAS RUTAS
 
 $nombreImagen = $_FILES['foto']['name'];
 $tipoImagen = $_FILES['foto']['type'];
 $tmp_name = $_FILES['foto']['tmp_name'];
-
+$dir = "../uploaded_images/";
 
 if (!empty($nombreImagen)) {
 
+
+    //Aqui varificamos si la imagen es de tipo jpg, png o jpeg
     $tipos_permitidos = array('image/jpg', 'image/png', 'image/jpeg');
 
     if (!in_array($tipoImagen, $tipos_permitidos)) {
@@ -72,22 +76,42 @@ if (!empty($nombreImagen)) {
     }
 
 
-    $destino = "../../views/uploaded_images/" . basename($nombreImagen);
+
+    //Verificar si existe una imagen con ese nombre
+    $ruta = "../../views/uploaded_images/";
+    $bandera = false;
 
 
-    if (!move_uploaded_file($tmp_name, $destino)) {
+    //Obtenemos un array donde obtenemos los nombres d elos archivos de uploaded_images
+    $archivos = scandir($ruta);
 
-
-        $error = error_get_last();
-        enviarRespuesta('error', 'No se pudo mover la imagen al directorio destino. Error: ' . $error['message']);
+    //Comparamos y si la imagen actual tiene el mismo nombre que una ya insertada, no se insertara
+    foreach ($archivos as $arc) {
+        if ($arc == $nombreImagen) {
+            $bandera = true;
+            break;
+        }
     }
 
-    $rutaImagen = "../uploaded_images/" . $nombreImagen;
+
+    if (!$bandera) {
+
+        //Si no encontramos una imagen con el mismo nombre, intentamos mover la imagen actual a la carpetta de upload_images
+        $destino = $ruta . basename($nombreImagen);
+
+        if (!move_uploaded_file($tmp_name, $destino)) {
+            $error = error_get_last();
+            enviarRespuesta('error', 'No se pudo mover la imagen al directorio destino. Error: ' . $error['message']);
+        }
+    }
+
+
+    //Independientemente de si se agrego o no la imagen, se inserta la ruta
+    $rutaImagen = $dir . $nombreImagen;
     $producto->setImage($rutaImagen);
-
+    
 } else {
-
-    $producto->setImage('../uploaded_images/default.jpg');
+    $producto->setImage($dir . 'default.jpg');
 }
 
 
@@ -99,6 +123,7 @@ try {
         enviarRespuesta('success', 'El producto se ha agregado con éxito.');
         exit;
     }
+
 } catch (Exception $e) {
 
     enviarRespuesta('error', 'Se ha producido un error: ' . $e->getMessage());
