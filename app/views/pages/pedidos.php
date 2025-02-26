@@ -70,8 +70,6 @@ require_once '../resources/layout/menu.php';
 
 
 
-
-
 <?php
 
 require_once '../resources/layout/footer.php';
