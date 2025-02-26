@@ -2,8 +2,14 @@
 
 session_start();
 
-$title = 'Clientes';
+
 require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador']);
+
+
+
+$title = 'Clientes';
+//require_once '../../routes/RouteController.php';
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
 require_once '../../model/Usuario.php';

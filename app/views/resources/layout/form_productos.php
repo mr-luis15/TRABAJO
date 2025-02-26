@@ -64,14 +64,14 @@ $resultado = $categorias->obtenerCategorias();
                     </div>
 
                     <div class="form-group">
-                        <label for="formFile" class="form-label">Agregar una imagen</label>
+                        <label for="foto" class="form-label">Agregar una imagen</label>
                         <input class="form-control" type="file" id="foto" name="foto">
                     </div>
 
                     <input type="hidden" value="Tecnico" name="nivel" id="nivel">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-success" id="agregar_producto"><i class="fas fa-user-plus"></i> Registrar producto</button>
+                        <button type="button" class="btn btn-success" id="agregar_producto"><i class="fas fa-boxes"></i> Registrar producto</button>
                     </div>
                 </form>
             </div>

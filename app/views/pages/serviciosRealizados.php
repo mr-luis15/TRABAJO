@@ -79,7 +79,7 @@ require_once '../../helpers/helpers.php';
 
                                     <td><?php echo $servicio['nombre_cliente']; ?></td>
 
-                                    <td><?php echo isNull($servicio['nombre_tecnico'], "<b style='color: red'>No Asignado</b>"); ?></td>
+                                    <td><?php echo isNull($servicio['nombre_tecnico'], "<b>No Asignado</b>"); ?></td>
 
                                     <td><?php echo $servicio['direccion']; ?></td>
 

@@ -4,12 +4,8 @@ session_start();
 
 require_once '../../routes/RouteController.php';
 
+nivelesPermitidos(['Administrador']);
 
-
-if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nivel'] != 'Administrador') {
-    Route::msg('Error');
-    exit;
-}
 
 
 

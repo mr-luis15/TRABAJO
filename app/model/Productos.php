@@ -92,10 +92,6 @@ class Producto {
 
 
 
-
-
-
-
     public function crear() {
 
         $query = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria, estado, img_producto) VALUES (:nombre, :descripcion, :precio, :stock, :categoria, :estado, :img_producto)";
@@ -115,9 +111,6 @@ class Producto {
 
 
 
-
-
-
     public function eliminar() {
 
         $query = "DELETE FROM productos WHERE id = :id";
@@ -128,6 +121,9 @@ class Producto {
 
         return $stmt->execute() ? true : false;
     }
+
+
+
 
     public function editar() {
 
@@ -146,6 +142,9 @@ class Producto {
     }
 
     
+
+
+
     public function obtenerProductos() {
 
         $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, p.estado, c.nombre AS categoria_nombre FROM productos p LEFT JOIN categorias c ON p.categoria = c.id";
@@ -158,6 +157,9 @@ class Producto {
         return !empty($resultado) ? $resultado : false;
     }
     
+
+
+
 
 
     public function existeProductoByNombre() {
@@ -173,6 +175,9 @@ class Producto {
     }
 
 
+
+
+
     public function existeProductoById() {
 
         $query = "SELECT id FROM productos WHERE id = :id";
@@ -184,6 +189,9 @@ class Producto {
         return $stmt->rowCount() > 0 ? true : false;
 
     }
+
+
+
 
 
     public function obtenerProductoById() {
@@ -199,13 +207,16 @@ class Producto {
     }
 
 
-    public function cambiarEstado() {
+
+
+
+    public function cambiarEstado($estado) {
 
         $query = "UPDATE productos SET estado = :estado WHERE id = :id";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':id', $this->id);
-        $stmt->bindParam(':estado', $this->estado);
+        $stmt->bindParam(':estado', $estado);
 
         return $stmt->execute() ? true : false;
     }

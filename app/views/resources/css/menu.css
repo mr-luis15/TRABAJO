@@ -194,6 +194,7 @@ tr:hover{
 	background-color: #ddd;
 } */
 
+
 .table thead {
     background-color: #2f74c8 !important;
     color: white !important;
@@ -203,6 +204,11 @@ tr:hover{
 .table img {
     max-width: 150px;
     max-height: 60px;
+}
+
+
+.table b {
+    color: #c72929;
 }
 
 

@@ -6,16 +6,9 @@ session_start();
 
 require_once '../../routes/RouteController.php';
 
-if (
-    !isset($_SESSION['usuario']) ||
+nivelesPermitidos(['Administrador', 'Secretaria de Compas', 'Secretaria de Ventas', 'Tecnico']);
 
-    $_SESSION['usuario']['nivel'] != 'Administrador' && $_SESSION['usuario']['nivel'] != 'Secretaria de Ventas' &&
-    $_SESSION['usuario']['nivel'] != 'Secretaria de Compras' && $_SESSION['usuario']['nivel'] != 'Tecnico'
-) {
 
-    Route::msg('Error');
-    exit;
-}
 
 
 $title = "Dashboard | Vista Principal";

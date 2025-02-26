@@ -14,17 +14,17 @@
             <div class="modal-body">
                 <form id="formulario">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                        <label for="nombre" class="col-form-label">Nombre:</label>
                         <input type="text" class="form-control" name="nombre" id="nombre" required>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Correo electronico:</label>
+                        <label for="correo" class="col-form-label">Correo electronico:</label>
                         <input type="email" class="form-control" name="correo" id="correo" required>
                     </div>
 
                     
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Codigo de telefono:</label>
+                        <label for="codigo" class="col-form-label">Codigo de telefono:</label>
                         <select class="form-select" aria-label="Default select example" name="codigo" id="codigo">
                             
                             <?php
@@ -41,11 +41,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Telefono:</label>
+                        <label for="telefono" class="col-form-label">Telefono:</label>
                         <input type="tel" class="form-control" name="telefono" id="telefono" placeholder="El telefono debe tener 10 digitos" required>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Contraseña:</label>
+                        <label for="password" class="col-form-label">Contraseña:</label>
                         <input type="password" class="form-control" name="password" id="password" required>
                     </div>
                     <input type="hidden" value="Tecnico" name="nivel" id="nivel">

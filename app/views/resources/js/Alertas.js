@@ -20,7 +20,7 @@ function deleted(mensaje) {
     Swal.fire({
         icon: 'success',
         title: 'Eliminado',
-        timer: 2000,
+        //timer: 2000,
         text: mensaje,
         confirmButtonText: 'Aceptar'
     }).then((result) => {

@@ -21,7 +21,7 @@ require_once '../../routes/RouteController.php';
 
         <div class="recuadro-button">
             <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalCategorias">
-                <i class="fas fa-user-plus"></i> Agregar categoria
+                <i class="fas fa-sitemap"></i> Agregar categoria
             </button>
         </div>
 
@@ -47,30 +47,30 @@ require_once '../../routes/RouteController.php';
 
                             foreach ($resultado as $cat) :
 
-                                ?>
-                                    <tr>
-                                        <td><?php echo $cat['id']; ?></td>
-                                        <td><?php echo $cat['nombre']; ?></td>
-                                        <td><?php echo $cat['descripcion']; ?></td>
-                
-                                        <td>
-                                            <a class="btn btn-danger" onclick="eliminarCategoria(<?php echo $cat['id'] ?>)">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
+                        ?>
+                                <tr>
+                                    <td><?php echo $cat['id']; ?></td>
+                                    <td><?php echo $cat['nombre']; ?></td>
+                                    <td><?php echo $cat['descripcion']; ?></td>
 
-                                            <a href="editarCategoria.php?id=<?php echo $cat['id']; ?>" class="btn btn-warning">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                        </td>
-                                    </tr>
-                                <?php
+                                    <td>
+                                        <a class="btn btn-danger" onclick="eliminarCategoria(<?php echo $cat['id'] ?>)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+
+                                        <a href="editarCategoria.php?id=<?php echo $cat['id']; ?>" class="btn btn-warning">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                        <?php
 
                             endforeach;
-                            
+
                         else :
 
                             echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                        
+
                         endif;
 
                         ?>

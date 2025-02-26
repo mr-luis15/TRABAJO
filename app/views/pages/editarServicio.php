@@ -49,7 +49,7 @@ if (!$service) {
                         <h3 class="card-title text-center">Modificar Servicio</h3>
                         <form>
                             <div class="mb-3">
-                                <label for="codigo" class="form-label">Clientes: </label>
+                                <label for="cliente" class="form-label">Clientes: </label>
                                 <select class="form-select" name="cliente" id="cliente">
 
                                     <option value="<?php echo $service['id_cliente']; ?>"><?php echo $service['nombre_cliente']; ?></option>
@@ -73,7 +73,7 @@ if (!$service) {
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="codigo" class="form-label">Tecnicos: </label>
+                                <label for="tecnico" class="form-label">Tecnicos: </label>
                                 <select class="form-select" name="tecnico" id="tecnico">
 
                                     <option value="<?php echo isNull($service['id_tecnico'], "No asignado"); ?>"><?php echo isNull($service['nombre_tecnico'], "No asignado"); ?></option>
@@ -101,12 +101,12 @@ if (!$service) {
                                 <input type="text" value="<?php echo $service['direccion'] ?>" class="form-control" name="direccion" id="direccion" required>
                             </div>
                             <div class="mb-3">
-                                <label for="telefono" class="form-label">Descripcion: </label>
+                                <label for="descripcion" class="form-label">Descripcion: </label>
                                 <textarea class="form-control" name="descripcion" id="descripcion" required><?php echo $service['descripcion'] ?></textarea>
                             </div>
 
                             <div class="mb-3">
-                                <label for="codigo" class="form-label">Estado del servicio: </label>
+                                <label for="estado" class="form-label">Estado del servicio: </label>
                                 <select class="form-select" name="estado" id="estado">
 
                                     <?php
@@ -129,7 +129,7 @@ if (!$service) {
                             </div>
 
                             <div class="mb-3">
-                                <label for="telefono" class="form-label">Fecha: </label>
+                                <label for="fecha" class="form-label">Fecha: </label>
                                 <input type="date" value="<?php echo $service['fecha_servicio'] ?>" name="fecha" id="fecha" class="form-control" required>
                             </div>
 
@@ -153,29 +153,29 @@ if (!$service) {
                         <h3 class="card-title text-center">Datos Actuales del Servicio</h3>
                         <form>
                             <div class="mb-3">
-                                <label for="nombre_actual" class="form-label">CLiente</label>
-                                <input type="text" value="<?php echo $service['nombre_cliente']; ?>" class="form-control" id="nombre_actual" disabled>
+                                <label for="cliente_actual" class="form-label">Cliente</label>
+                                <input type="text" value="<?php echo $service['nombre_cliente']; ?>" class="form-control" id="cliente_actual" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="codigo_actual" class="form-label">Tecnico</label>
-                                <input type="text" value="<?php echo isNull($service['nombre_tecnico'], "No asignado"); ?>" class="form-control" id="codigo_actual" disabled>
+                                <label for="tecnico_actual" class="form-label">Tecnico</label>
+                                <input type="text" value="<?php echo isNull($service['nombre_tecnico'], "No asignado"); ?>" class="form-control" id="tecnico_actual" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="telefono_actual" class="form-label">Direccion: </label>
-                                <input type="text" value="<?php echo  $service['direccion'] ?>" class="form-control" id="telefono_actual" disabled>
+                                <label for="direccion_actual" class="form-label">Direccion: </label>
+                                <input type="text" value="<?php echo  $service['direccion'] ?>" class="form-control" id="direccion_actual" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="correo_actual" class="form-label">Descripcion</label>
-                                <textarea class="form-control" name="" id="" disabled><?php echo $service['descripcion'] ?></textarea>
+                                <label for="descripcion_actual" class="form-label">Descripcion</label>
+                                <textarea class="form-control" name="descripcion_actual" id="descripcion_actual" disabled><?php echo $service['descripcion'] ?></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="nivel_actual" class="form-label">Estado del servicio</label>
-                                <input type="text" value="<?php echo $service['estado']; ?>" class="form-control" id="nivel_actual" disabled>
+                                <label for="estado_actual" class="form-label">Estado del servicio</label>
+                                <input type="text" value="<?php echo $service['estado']; ?>" class="form-control" id="estado_actual" disabled>
                             </div>
 
                             <div class="mb-3">
-                                <label for="nivel_actual" class="form-label">Fecha</label>
-                                <input type="text" value="<?php echo $service['fecha_servicio']; ?>" class="form-control" id="nivel_actual" disabled>
+                                <label for="fecha_actual" class="form-label">Fecha</label>
+                                <input type="text" value="<?php echo $service['fecha_servicio']; ?>" class="form-control" id="fecha_actual" disabled>
                             </div>
                         </form>
                     </div>
