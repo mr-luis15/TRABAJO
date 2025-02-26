@@ -77,7 +77,7 @@ if (!empty($nombreImagen)) {
 
 
 
-    //Verificar si existe una imagen con ese nombre
+    //Verificar si existe una imagen con ese nombre elejido
     $ruta = "../../views/uploaded_images/";
     $bandera = false;
 
