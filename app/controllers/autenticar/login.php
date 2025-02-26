@@ -2,6 +2,7 @@
 
 require_once '../../routes/RouteController.php';
 require_once '../../model/Usuario.php';
+require_once '../../helpers/validaciones.php';
 
 
 $usuario = new Usuario();
@@ -10,14 +11,14 @@ $usuario->password = $_POST['password'];
 
 
 if (!$usuario->existeUsuarioByEmail()) {
-    echo json_encode(['status' => 'error', 'message' => 'No existe este usuario']);
+    enviarRespuesta('error', 'No existe este usuario');
     exit;
 }
 
 
 $usuario->obtenerPasswordHash();
 if (!password_verify($usuario->password, $usuario->passwordHash)) {
-    echo json_encode(['status' => 'error', 'message' => 'Contraseña incorrecta']);
+    enviarRespuesta('error', 'Contraseña incorrecta');
     exit;
 }
 
@@ -25,7 +26,7 @@ if (!password_verify($usuario->password, $usuario->passwordHash)) {
 $datos = $usuario->obtenerDatos();
 
 if (!$datos) {
-    echo json_encode(['status' => 'error', 'message' => 'No se han podido obtener los datos']);
+    enviarRespuesta('error', 'No se han podido obtener los datos');
     exit;
 }
 
@@ -50,7 +51,7 @@ foreach ($niveles as $nivel) {
     }
 }
 
-echo json_encode(['status' => 'error', 'message' => 'No es un nivel de usuario valido']);
+enviarRespuesta('error', 'No es un nivel de usuario valido');
 
 
 ?>

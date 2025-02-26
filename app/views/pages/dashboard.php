@@ -1,21 +1,13 @@
 <?php
 
-//CAMBIO HECHO DESDE LA PARTICION EN LINUX
+//CAMBIO HECHO DESDE LA PARTICION EN LINUX 2
 
 session_start();
 
 require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador', 'Secretaria de Compras', 'Secretaria de Ventas', 'Tecnico']);
 
-if (
-    !isset($_SESSION['usuario']) ||
 
-    $_SESSION['usuario']['nivel'] != 'Administrador' && $_SESSION['usuario']['nivel'] != 'Secretaria de Ventas' &&
-    $_SESSION['usuario']['nivel'] != 'Secretaria de Compras' && $_SESSION['usuario']['nivel'] != 'Tecnico'
-) {
-
-    Route::msg('Error');
-    exit;
-}
 
 
 $title = "Dashboard | Vista Principal";

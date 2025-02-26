@@ -2,8 +2,14 @@
 
 session_start();
 
-$title = 'Clientes';
+
 require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador']);
+
+
+
+$title = 'Clientes';
+//require_once '../../routes/RouteController.php';
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
 require_once '../../model/Usuario.php';
@@ -41,13 +47,15 @@ require_once '../../helpers/helpers.php';
                     </tr>
                 </thead>
                 <tbody>
+                    
                     <?php
                     
                     $usuarios = new Usuario();
                     $listado = $usuarios->obtenerClientes();
 
-                    if ($listado) {
-                        foreach ($listado as $usuario) {
+                    if ($listado != false) :
+
+                        foreach ($listado as $usuario) :
 
                             ?>
 
@@ -71,14 +79,16 @@ require_once '../../helpers/helpers.php';
 
                             <?php
 
-                        }
+                        endforeach;
                         
-                    } else {
+                    else :
 
                         echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                    }
+                    
+                    endif;
 
                     ?>
+
                 </tbody>
             </table>
         </div>

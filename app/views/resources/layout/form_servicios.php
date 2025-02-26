@@ -19,28 +19,32 @@ $tecnicos = $usuario->obtenerTecnicos();
             <div class="modal-body">
                 <form id="formulario">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Escoga un Cliente:</label>
+                        <label for="cliente" class="col-form-label">Escoga un Cliente:</label>
                         <select class="form-select" aria-label="Default select example" name="cliente" id="cliente">
 
                         <?php
 
-                            foreach ($clientes as $cliente) {
+                            foreach ($clientes as $cliente) :
+                                
                                 echo "<option value=".$cliente['id_usuario'].">".$cliente['nombre']."</option>";
-                            }
+                            
+                            endforeach;
 
                         ?>
 
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Escoga un Tecnico:</label>
+                        <label for="tecnico" class="col-form-label">Escoga un Tecnico:</label>
                         <select class="form-select" aria-label="Default select example" name="tecnico" id="tecnico">
 
                         <?php
 
-                            foreach ($tecnicos as $tecnico) {
+                            foreach ($tecnicos as $tecnico) :
+
                                 echo "<option value=".$tecnico['id_usuario'].">".$tecnico['nombre']."</option>";
-                            }
+                            
+                            endforeach;
 
                         ?>
 
@@ -48,17 +52,17 @@ $tecnicos = $usuario->obtenerTecnicos();
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Descripcion del servicio:</label>
+                        <label for="descripcion" class="col-form-label">Descripcion del servicio:</label>
                         <textarea name="descripcion" class="form-control" id="descripcion" placeholder="Maximo 255 caracteres"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Direccion:</label>
+                        <label for="direccion" class="col-form-label">Direccion:</label>
                         <input name="direccion" class="form-control" id="direccion" type="text">
                     </div>
 
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Fecha de realizacion:</label>
+                        <label for="fecha" class="col-form-label">Fecha de realizacion:</label>
                         <input name="fecha" class="form-control" id="fecha" type="date">
                     </div>
                     <div class="modal-footer">

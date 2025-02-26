@@ -1,21 +1,10 @@
     <?php
 
-    require_once '../../routes/RouteController.php';
-
-
     session_start();
 
+    require_once '../../routes/RouteController.php';
+    nivelesPermitidos(['Administrador', 'Tecnico']);
 
-    if (
-        !isset($_SESSION['usuario']) ||
-
-        $_SESSION['usuario']['nivel'] != 'Administrador' && $_SESSION['usuario']['nivel'] != 'Secretaria de Ventas' &&
-        $_SESSION['usuario']['nivel'] != 'Secretaria de Compras' && $_SESSION['usuario']['nivel'] != 'Tecnico'
-    ) {
-
-        Route::msg('Error');
-        exit;
-    }
 
 
 
@@ -35,7 +24,9 @@
         <h2 class="h2">Lista de servicios pendientes</h2>
         <hr>
         <div class="card">
+
             <!-- Recuadro superior con el botón -->
+            
             <div class="recuadro-button">
                 <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalServicios">
                     <i class="far fa-calendar-plus"></i> Agregar pedido
@@ -47,7 +38,9 @@
                     <i class="fas fa-user-plus"></i> Exportar PDF
                 </button>
             </div>
+
             <!-- Tabla con borde separado -->
+            
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead">
@@ -65,27 +58,29 @@
                         <tbody>
 
                             <?php
+
+                            /**
+                             * Hacer una verificacion para saber si el nivel 
+                             * de usuario es Tecnico y cambiar la consulta 
+                             * por el id del tecnico que ha iniciado sesion
+                             */
+
                             $servicios = new Servicios();
                             $listado = $servicios->obtenerServiciosNoRealizados();
 
-                            if ($listado) {
-                                foreach ($listado as $servicio) {
+                            if ($listado != false) :
 
-                                    ?>
-                                    
+                                foreach ($listado as $servicio) :
+
+                            ?>
+
                                     <tr>
                                         <td><?php echo $servicio['id_servicio']; ?></td>
-
                                         <td><?php echo $servicio['nombre_cliente']; ?></td>
-
-                                        <td><?php echo isNull($servicio['nombre_tecnico'], "<b style='color: red'>No Asignado</b>"); ?></td>
-
+                                        <td><?php echo isNull($servicio['nombre_tecnico'], "<b>No Asignado</b>"); ?></td>
                                         <td><?php echo $servicio['direccion']; ?></td>
-
                                         <td><?php echo $servicio['descripcion']; ?></td>
-
-                                        <td><?php echo mostrarServicioRealzizado($servicio['estado']); ?></td>
-
+                                        <td><?php echo mostrarEstado($servicio['estado']); ?></td>
                                         <td><?php echo $servicio['fecha_servicio']; ?></td>
 
                                         <td>
@@ -103,12 +98,16 @@
                                         </td>
                                     </tr>
 
-                                    <?php
+                            <?php
 
-                                }
-                            } else {
+                                endforeach;
+
+                            else :
+
                                 echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                            }
+
+                            endif;
+
                             ?>
 
                         </tbody>

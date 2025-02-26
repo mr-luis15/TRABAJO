@@ -1,14 +1,6 @@
 <?php
 
 
-session_start();
-
-if ($_SESSION['usuario']['nivel'] != 'Administrador') {
-    echo json_encode(['status' => 'error', 'message' => 'No tienes permitido hacer esta accion']);
-}
-
-
-
 require_once '../../model/Usuario.php';
 require_once '../../helpers/validaciones.php';
 
@@ -101,7 +93,6 @@ if ($usuario->existeTelefono()) {
 
 
 $usuario->passwordHash = password_hash($usuario->password, PASSWORD_BCRYPT);
-
 
 
 try {

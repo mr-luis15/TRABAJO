@@ -3,11 +3,10 @@
 session_start();
 
 require_once '../../routes/RouteController.php';
-nivelesPermitidos(['Administrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
+nivelesPermitidos(['Admministrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
 
 
 
-$title = "Vista de Productos";
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
 require_once '../../model/Productos.php';
@@ -22,17 +21,20 @@ require_once '../../helpers/helpers.php';
     <h2 class="h2">Lista de Productos</h2>
     <hr>
     <div class="card">
+
+
+
         <div class="recuadro-button">
-            
             <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalProductos">
-                <i class="fas fa-cart-plus"></i> Agregar producto
+                <i class="fas fa-user-plus"></i> Agregar producto
             </button>
 
             <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalProductos">
                 <i class="fas fa-user-plus"></i> Productos no disponibles
             </button>
-        
         </div>
+
+
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -55,30 +57,30 @@ require_once '../../helpers/helpers.php';
 
                     $productos = new Producto();
                     $resultado = $productos->obtenerProductos();
-                    $dir = "../uploaded_images/";
+
 
                     if ($resultado != false) :
 
                         foreach ($resultado as $prod):
 
                     ?>
-
                             <tr>
                                 <td><?php echo $prod['id']; ?></td>
                                 <td><?php echo $prod['nombre']; ?></td>
                                 <td><?php echo $prod['descripcion']; ?></td>
                                 <td><?php echo "$" . $prod['precio']; ?></td>
                                 <td><?php echo $prod['stock']; ?></td>
-                                <td><?php echo isNull($prod['categoria_nombre'], '<b>Categoria no asignada</b>'); ?></td>
-                                <td><?php echo "<img class='rounded' loading='lazy' src='".isNull($prod['img_producto'], $dir . 'default.jpg')."'>" ?></td>
+                                <td><?php echo isNull($prod['categoria_nombre'], '<b style="color: red">Categoria no asignada</b>'); ?></td>
+                                <td><?php echo isNull($prod['img_producto'], '<img class="rounded float-left" loading="lazy" src="../uploaded_images/default.jpg">') ?></td>
                                 <td><?php echo mostrarEstado($prod['estado']); ?></td>
 
                                 <td>
-
-                                    <a class="btn btn-success" onclick="">
-                                        <i class="far fa-bookmark"></i>
+                                    <a>
+                                        <a class="btn btn-success" onclick="">
+                                            <i class="far fa-bookmark"></i>
+                                        </a>
                                     </a>
-                            
+
                                     <a class="btn btn-danger" onclick="eliminarProducto(<?php echo $prod['id']; ?>) ">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
@@ -89,7 +91,6 @@ require_once '../../helpers/helpers.php';
 
                                 </td>
                             </tr>
-
                     <?php
 
                         endforeach;
@@ -114,6 +115,6 @@ require_once '../../helpers/helpers.php';
 <?php
 
 require_once '../resources/layout/footer.php';
-require_once '../resources/layout/form_productos.php';
+require_once '..//resources/layout/form_productos.php';
 
 ?>

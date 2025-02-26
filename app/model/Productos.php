@@ -12,6 +12,7 @@ class Producto {
     private $categoria;
     private $descripcion;
     private $estado;
+    private $ruta_img;
     private $PDO;
 
 
@@ -51,6 +52,10 @@ class Producto {
         $this->estado = $estado;
     }
 
+    public function setImage($ruta_imagen) {
+        $this->ruta_img = $ruta_imagen;
+    }
+
 
     public function getId() {
         return $this->id;
@@ -80,16 +85,16 @@ class Producto {
         return $this->estado;
     }
 
-
-
-
+    public function getImage() {
+        return $this->ruta_img;
+    }
 
 
 
 
     public function crear() {
 
-        $query = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria, estado) VALUES (:nombre, :descripcion, :precio, :stock, :categoria, :estado)";
+        $query = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria, estado, img_producto) VALUES (:nombre, :descripcion, :precio, :stock, :categoria, :estado, :img_producto)";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':nombre', $this->nombre);
@@ -98,12 +103,10 @@ class Producto {
         $stmt->bindParam(':stock', $this->stock);
         $stmt->bindParam(':categoria', $this->categoria);
         $stmt->bindParam(':estado', $this->estado);
+        $stmt->bindParam(':img_producto', $this->ruta_img);
 
         return $stmt->execute() ? true : false;
     }
-
-
-
 
 
 
@@ -119,9 +122,12 @@ class Producto {
         return $stmt->execute() ? true : false;
     }
 
+
+
+
     public function editar() {
 
-        $query = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, stock = :stock, categoria = :categoria WHERE id = :id";
+        $query = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, stock = :stock, estado = :estado, categoria = :categoria WHERE id = :id";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':id', $this->id);
@@ -129,17 +135,19 @@ class Producto {
         $stmt->bindParam(':descripcion', $this->descripcion);
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':stock', $this->stock);
+        $stmt->bindParam(':estado', $this->estado);
         $stmt->bindParam(':categoria', $this->categoria);
 
         return $stmt->execute() ? true : false;
     }
 
     
+
+
+
     public function obtenerProductos() {
 
-        $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, p.estado, c.nombre AS categoria_nombre 
-                  FROM productos p 
-                  LEFT JOIN categorias c ON p.categoria = c.id";
+        $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, p.estado, p.img_producto, c.nombre AS categoria_nombre FROM productos p LEFT JOIN categorias c ON p.categoria = c.id";
     
         $stmt = $this->PDO->prepare($query);
         $stmt->execute();
@@ -149,6 +157,9 @@ class Producto {
         return !empty($resultado) ? $resultado : false;
     }
     
+
+
+
 
 
     public function existeProductoByNombre() {
@@ -164,6 +175,25 @@ class Producto {
     }
 
 
+
+
+
+    public function existeProductoById() {
+
+        $query = "SELECT id FROM productos WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0 ? true : false;
+
+    }
+
+
+
+
+
     public function obtenerProductoById() {
 
         $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, p.categoria, p.estado, c.nombre AS categoria_nombre FROM productos p LEFT JOIN categorias c ON p.categoria = c.id WHERE p.id = :id";
@@ -175,6 +205,24 @@ class Producto {
         return $stmt->rowCount() > 0 ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
 
     }
+
+
+
+
+
+    public function cambiarEstado($estado) {
+
+        $query = "UPDATE productos SET estado = :estado WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':estado', $estado);
+
+        return $stmt->execute() ? true : false;
+    }
+
+
+
 
     /*
     public function almacenarDatos($POST) {

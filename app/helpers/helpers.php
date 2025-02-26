@@ -24,9 +24,11 @@ function mostrarTelefono($tel)
 
 
 
-function mostrarServicioRealzizado($estado) {
+function mostrarEstado($estado) {
 
-    return $estado == "Realizado"? "<b style='color: green'>".$estado."</b>" : "<b style='color: orange'>".$estado."</b>";
+
+    return $estado == "Realizado" || $estado == "Disponible"? "<b style='color: green'>".$estado."</b>" : "<b style='color: orange'>".$estado."</b>";
+
 
 }
 

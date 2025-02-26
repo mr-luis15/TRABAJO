@@ -1,3 +1,148 @@
+//LOGIN Y REGISTRO
+
+
+$(document).ready(function () {
+    $('#login').on('click', function () {
+        var data = {
+            correo: $('#correo').val(),
+            password: $('#password').val(),
+        };
+
+        $.ajax({
+            url: controller('autenticar', 'login'),
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+
+                const mensaje = response.message;
+
+                if (response.status == 'success') {
+
+                    const nivel = response.nivel;
+
+                    switch (nivel) {
+                        case 'Administrador':
+                            window.location.href = 'dashboard.php';
+                            break;
+
+                        case 'Secretaria de Compras':
+                            window.location.href = 'dashboard.php';
+                            break;
+
+                        case 'Secretaria de Ventas':
+                            window.location.href = 'dashboard.php';
+                            break;
+
+                        case 'Tecnico':
+                            window.location.href = 'dashboard.php';
+                            break;
+
+                        case 'Cliente':
+                            window.location.href = 'cliente.php';
+                            break;
+                    }
+                }
+
+                if (response.status === 'error') {
+                    error(mensaje);
+                }
+            },
+            error: function (xhr, status, error) {
+                error_servidor();
+            }
+
+        })
+    })
+})
+
+
+$(document).ready(function () {
+    $('#registrarse').on('click', function () {
+        var data = {
+            nombre: $('#nombre').val(),
+            telefono: $('#telefono').val(),
+            correo: $('#correo').val(),
+            password: $('#password').val(),
+            codigo: $('#codigo').val()
+        };
+
+        $.ajax({
+            url: controller('usuarios', 'registrarse'),
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+
+                const mensaje = response.message;
+
+                if (response.status === 'success') {
+                    registrado(mensaje);
+                }
+
+                if (response.status === 'error') {
+                    error(mensaje);
+                }
+            },
+            error: function (xhr, status, error) {
+                error_servidor();
+            }
+
+        })
+    })
+})
+
+
+
+
+
+
+
+/**
+ * 
+ * ENVIAR DATOS DE USUARIOS
+ * 
+ */
+
+
+$(document).ready(function () {
+    $('#enviar').on('click', function () {
+        var data = {
+            nombre: $('#nombre').val(),
+            telefono: $('#telefono').val(),
+            correo: $('#correo').val(),
+            password: $('#password').val(),
+            nivel: $('#nivel').val(),
+            codigo: $('#codigo').val()
+        };
+
+        $.ajax({
+            url: controller('usuarios', 'crearUsuario'),
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+
+                const mensaje = response.message;
+
+                if (response.status === 'success') {
+                    agregado(mensaje);
+                }
+
+                if (response.status === 'error') {
+                    error(mensaje);
+                }
+            },
+            error: function (xhr, status, error) {
+                error_servidor();
+            }
+
+        })
+    })
+})
+
+
+
 // Función para eliminar usuario
 function eliminarUsuario(userId) {
     Swal.fire({
@@ -38,42 +183,6 @@ function eliminarUsuario(userId) {
 }
 
 
-
-$(document).ready(function () {
-    $('#enviar').on('click', function () {
-        var data = {
-            nombre: $('#nombre').val(),
-            telefono: $('#telefono').val(),
-            correo: $('#correo').val(),
-            password: $('#password').val(),
-            nivel: $('#nivel').val(),
-            codigo: $('#codigo').val()
-        };
-
-        $.ajax({
-            url: controller('usuarios', 'crearUsuario'),
-            type: 'POST',
-            data: data,
-            dataType: 'json',
-            success: function (response) {
-
-                const mensaje = response.message;
-
-                if (response.status === 'success') {
-                    agregado(mensaje);
-                }
-
-                if (response.status === 'error') {
-                    error(mensaje);
-                }
-            },
-            error: function (xhr, status, error) {
-                error_servidor();
-            }
-
-        })
-    })
-})
 
 
 $(document).ready(function () {
@@ -128,18 +237,86 @@ $(document).ready(function () {
 
 
 
+
+
+/**
+ * 
+ * ENVIAR DATOS DE PRODUCTOS
+ * 
+ */
+
 $(document).ready(function () {
-    $('#registrarse').on('click', function () {
-        var data = {
-            nombre: $('#nombre').val(),
-            telefono: $('#telefono').val(),
-            correo: $('#correo').val(),
-            password: $('#password').val(),
-            codigo: $('#codigo').val()
-        };
+    $('#agregar_producto').on('click', function () {
+        var formData = new FormData();
+
+        // Agregar datos del producto
+        formData.append('nombre', $('#nombre').val());
+        formData.append('descripcion', $('#descripcion').val());
+        formData.append('stock', $('#stock').val());
+        formData.append('precio', $('#precio').val());
+        formData.append('id_categoria', $('#id_categoria').val());
+        formData.append('estado', $('#estado').val());
+
+        // Obtener el archivo seleccionado
+        var archivo = $('#foto')[0].files[0];
+        if (archivo) {
+            formData.append('foto', archivo);
+        }
+
+        // Imprimir los datos de formData
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ':', pair[1]);
+        }
 
         $.ajax({
-            url: controller('usuarios', 'registrarse'),
+            url: controller('productos', 'crearProducto'),
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            processData: false, // Evita que jQuery convierta el FormData en un string
+            contentType: false, // Evita que jQuery agregue encabezados incorrectos
+            success: function (response) {
+                const mensaje = response.message;
+                if (response.status === 'success') {
+                    agregado(mensaje);
+                } else if (response.status === 'error') {
+                    Swal.fire({
+                        title: "Error",
+                        text: mensaje,
+                        icon: "error",
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                error_servidor();
+            }
+        });
+    });
+});
+
+
+
+
+
+$(document).ready(function () {
+    $('#editar_producto').on('click', function () {
+
+        var data = {
+
+            id: $('#id').val(),
+            nombre: $('#nombre').val(),
+            descripcion: $('#descripcion').val(),
+            stock: $('#stock').val(),
+            precio: $('#precio').val(),
+            id_categoria: $('#id_categoria').val(),
+            estado: $('#estado').val()
+        };
+
+
+        //console.log(data);
+
+        $.ajax({
+            url: controller('productos', 'editarProducto'),
             type: 'POST',
             data: data,
             dataType: 'json',
@@ -148,56 +325,97 @@ $(document).ready(function () {
                 const mensaje = response.message;
 
                 if (response.status === 'success') {
-                    registrado(mensaje);
-                }
 
-                if (response.status === 'error') {
-                    error(mensaje);
-                }
-            },
-            error: function (xhr, status, error) {
-                error_servidor();
-            }
+                    Swal.fire({
 
-        })
-    })
-})
+                        title: "Modificado con exito",
+                        text: mensaje,
+                        icon: "success",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'productos.php'
+                        }
+                    });
 
 
 
-
-$(document).ready(function () {
-    $('#login').on('click', function () {
-        var data = {
-            correo: $('#correo').val(),
-            password: $('#password').val(),
-        };
-
-        $.ajax({
-            url: controller('autenticar', 'login'),
-            type: 'POST',
-            data: data,
-            dataType: 'json',
-            success: function (response) {
-
-                const mensaje = response.message;
-
-                if (response.status == 'success') {
-                    const nivel = response.nivel;
-                    redirigirPorNivel(nivel);
-                }
-
-                if (response.status === 'error') {
-                    error(mensaje);
+                } else if (response.status === 'error') {
+                    Swal.fire({
+                        title: "Error",
+                        text: mensaje,
+                        icon: "error",
+                    });
                 }
             },
             error: function (xhr, status, error) {
+                console.error("Error AJAX:", status, error, xhr.responseText);
                 error_servidor();
             }
 
-        })
-    })
-})
+        });
+    });
+});
+
+
+
+
+
+
+
+
+// Función para eliminar usuario
+function eliminarProducto(id) {
+    Swal.fire({
+        title: "¿Seguro que quieres eliminar este producto?",
+        text: "No lo podrás recuperar y todos los pedidos y servicios relacionados a este usuario serán borrados.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, borrar",
+        cancelButtonText: "No"
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: controller('productos', 'eliminarProducto'),
+                type: 'POST',
+                data: { id: id },
+                dataType: 'json',
+                success: function (response) {
+
+                    const mensaje = response.message;
+
+                    if (response.status === 'success') {
+                        deleted(mensaje);
+                    }
+
+                    if (response.status === 'error') {
+                        error(mensaje);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    error_servidor(mensaje);
+                }
+            });
+        }
+    });
+}
+
+
+
+
+
+
+/**
+ * 
+ * ENVIAR DATOS DE SERVICIOS
+ * 
+ */
+
+
+
+
 
 
 
@@ -380,7 +598,7 @@ $(document).ready(function () {
 
         //console.log(data);  // Imprime los datos a la consola antes de enviarlos
 
-        console.log(data);
+        //console.log(data);
 
         $.ajax({
             url: controller('servicios', 'editarServicio'),
@@ -422,7 +640,17 @@ $(document).ready(function () {
 
 
 
-//CATEGORIAS
+
+
+
+/**
+ * 
+ * ENVIAR DATOS CATEGORIAS
+ * 
+ */
+
+
+
 
 $(document).ready(function () {
     $('#agregar_categoria').on('click', function () {
@@ -478,7 +706,7 @@ function eliminarCategoria(idCat) {
     }).then((result) => {
         if (result.isConfirmed) {
 
-            console.log(idCat);
+            //console.log(idCat);
 
             $.ajax({
 
@@ -522,7 +750,7 @@ $(document).ready(function () {
         };
 
 
-        console.log(data);
+        //console.log(data);
 
         $.ajax({
             url: controller('categorias', 'editarCategoria'),
@@ -544,7 +772,7 @@ $(document).ready(function () {
                     }).then(() => {
                         window.location.href = 'categorias.php';
                     });
-                    
+
 
                 } else if (response.status === 'error') {
                     Swal.fire({
@@ -566,187 +794,12 @@ $(document).ready(function () {
 
 
 
-//PRODUCTOS
-
-$(document).ready(function () {
-    $('#agregar_producto').on('click', function () {
-
-        var data = {
-
-            nombre: $('#nombre').val(),
-            descripcion: $('#descripcion').val(),
-            stock: $('#stock').val(),
-            precio: $('#precio').val(),
-            id_categoria: $('#id_categoria').val(),
-            estado: $('#estado').val()
-        };
-
-
-        console.log(data);
-
-        $.ajax({
-            url: controller('productos', 'crearProducto'),
-            type: 'POST',
-            data: data,
-            dataType: 'json',
-            success: function (response) {
-
-                const mensaje = response.message;
-
-                if (response.status === 'success') {
-                    agregado(mensaje)
-
-                } else if (response.status === 'error') {
-                    Swal.fire({
-                        title: "Error",
-                        text: mensaje,
-                        icon: "error",
-                    });
-                }
-            },
-            error: function (xhr, status, error) {
-                error_servidor();
-            }
-
-        });
-    });
-});
 
 
 
 
 
-$(document).ready(function () {
-    $('#editar_producto').on('click', function () {
-
-        var data = {
-
-            id: $('#id').val(),
-            nombre: $('#nombre').val(),
-            descripcion: $('#descripcion').val(),
-            stock: $('#stock').val(),
-            precio: $('#precio').val(),
-            id_categoria: $('#id_categoria').val(),
-            estado: $('#estado').val()
-        };
-
-
-        console.log(data);
-
-        $.ajax({
-            url: controller('productos', 'editarProducto'),
-            type: 'POST',
-            data: data,
-            dataType: 'json',
-            success: function (response) {
-
-                const mensaje = response.message;
-
-                if (response.status === 'success') {
-
-                    Swal.fire({
-
-                        title: "Modificado con exito",
-                        text: mensaje,
-                        icon: "success",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = 'productos.php'
-                        }
-                    });
-
-
-
-                } else if (response.status === 'error') {
-                    Swal.fire({
-                        title: "Error",
-                        text: mensaje,
-                        icon: "error",
-                    });
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("Error AJAX:", status, error, xhr.responseText);
-                error_servidor();
-            }
-
-        });
-    });
-});
-
-
-
-
-
-
-
-
-// Función para eliminar usuario
-function eliminarProducto(id) {
-    Swal.fire({
-        title: "¿Seguro que quieres eliminar este producto?",
-        text: "No lo podrás recuperar y todos los pedidos y servicios relacionados a este usuario serán borrados.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, borrar",
-        cancelButtonText: "No"
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            $.ajax({
-                url: controller('productos', 'eliminarProducto'),
-                type: 'POST',
-                data: { id: id },
-                dataType: 'json',
-                success: function (response) {
-
-                    const mensaje = response.message;
-
-                    if (response.status === 'success') {
-                        deleted(mensaje);
-                    }
-
-                    if (response.status === 'error') {
-                        error(mensaje);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    error_servidor(mensaje);
-                }
-            });
-        }
-    });
-}
-
-
-
-function redirigirPorNivel(nivel) {
-
-    switch (nivel) {
-        case 'Administrador':
-            window.location.href = 'dashboard.php';
-            break;
-
-        case 'Secretaria de Compras':
-            window.location.href = 'dashboard.php';
-            break;
-
-        case 'Secretaria de Ventas':
-            window.location.href = 'dashboard.php';
-            break;
-
-        case 'Tecnico':
-            window.location.href = 'dashboard.php';
-            break;
-
-        case 'Cliente':
-            window.location.href = 'vistaCliente.php';
-            break;
-    }
-}
-
+//FUNCIONES AUXILIARES
 
 function enviarTablaNivel(nivel) {
 

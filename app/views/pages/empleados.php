@@ -3,13 +3,7 @@
 session_start();
 
 require_once '../../routes/RouteController.php';
-
-
-
-if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nivel'] != 'Administrador') {
-    Route::msg('Error');
-    exit;
-}
+nivelesPermitidos(['Administrador', 'Secretaria de Compras']);
 
 
 
@@ -50,39 +44,50 @@ require_once '../../helpers/helpers.php';
                         <th>Nivel</th>
                         <th>Acciones</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $usuarios = new Usuario();
-                    $listado = $usuarios->obtenerEmpleados();
+                    </thead>
+                    <tbody>
 
-                    if ($listado) {
-                        foreach ($listado as $usuario) {
-                            ?>
-                            <tr>
-                                <td><?php echo $usuario['id_usuario']; ?></td>
-                                <td><?php echo $usuario['nombre']; ?></td>
-                                <td><?php echo $usuario['correo']; ?></td>
-                                <td><?php echo $usuario['codigo_telefono']; ?></td>
-                                <td><?php echo mostrarTelefono($usuario['telefono']); ?></td>
-                                <td><?php echo $usuario['nivel']; ?></td>
-                                <td>
-                                    <a class="btn btn-danger" onclick="eliminarUsuario(<?php echo $usuario['id_usuario'] ?>)">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
+                        <?php
 
-                                    <a href="editarUsuario.php?id=<?php echo $usuario['id_usuario']; ?>" class="btn btn-warning">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <?php
-                        }
-                    } else {
-                        echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
-                    }
-                    ?>
-                </tbody>
+                        $usuarios = new Usuario();
+                        $listado = $usuarios->obtenerEmpleados();
+
+                        if ($listado):
+
+                            foreach ($listado as $usuario):
+
+                        ?>
+
+                                <tr>
+                                    <td><?php echo $usuario['id_usuario']; ?></td>
+                                    <td><?php echo $usuario['nombre']; ?></td>
+                                    <td><?php echo $usuario['correo']; ?></td>
+                                    <td><?php echo $usuario['codigo_telefono']; ?></td>
+                                    <td><?php echo mostrarTelefono($usuario['telefono']); ?></td>
+                                    <td><?php echo $usuario['nivel']; ?></td>
+                                    <td>
+                                        <a class="btn btn-danger" onclick="eliminarUsuario(<?php echo $usuario['id_usuario'] ?>)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+
+                                        <a href="editarUsuario.php?id=<?php echo $usuario['id_usuario']; ?>" class="btn btn-warning">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                        <?php
+
+                            endforeach;
+
+                        else :
+                            echo "<tr><td colspan='6' class='text-center'>No hay datos disponibles</td></tr>";
+
+                        endif;
+                        
+                        ?>
+
+                    </tbody>
             </table>
         </div>
     </div>
@@ -94,4 +99,3 @@ require_once '../resources/layout/footer.php';
 require_once '../resources/layout/form_empleados.php';
 
 ?>
-

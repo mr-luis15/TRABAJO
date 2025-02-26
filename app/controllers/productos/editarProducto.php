@@ -23,12 +23,15 @@ $producto->setEstado($_POST['estado']);
 $producto->setCategoria($_POST['id_categoria']);
 
 
-//HACER UNA VALIDACION QUE MARQUE EL ESTADO COMO NO DISPONIBLE SI EL STOCK ES 0 Y RETORNARLO EN EL MENSAJE
 
-if ($producto->getPrecio() < 0 || $producto->getStock() < 0) {
-    enviarRespuesta('error', 'El precio y el stock no pueden ser negativos. El valor mínimo es cero.');
+
+//HACER UNA VALIDACION QUE MARQUE EL ESTADO COMO NO DISPONIBLE SI EL STOCK ES 0 Y RETORNARLO EN EL MENSAJE
+if ($producto->getPrecio() <= 0 || $producto->getStock() < 0) {
+    enviarRespuesta('error', 'El valor del precio o del stock no estan permitidos. Solo numeros mayores a cero');
     exit;   
 }
+
+
 
 
 $estado = ($producto->getStock() == 0) ? 'No disponible' : 'Disponible';
@@ -43,6 +46,11 @@ if ($resultado['nombre'] != $producto->getNombre()) {
     if ($producto->existeProductoByNombre()) {
         enviarRespuesta('error', 'Ya hay un producto con este nombre');
     }
+}
+
+// Si no se ha cambiado la categoria, se cambia por NULL
+if ($producto->getCategoria() == 'No asignada' || $producto->getCategoria() == NULL) {
+    $producto->setCategoria(NULL);
 }
 
 

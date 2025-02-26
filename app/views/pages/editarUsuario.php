@@ -4,6 +4,13 @@
 
 session_start();
 
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador']);
+
+
+
+
+
 if (!isset($_GET['id'])) {
 
     echo "Error al recibir el ID";
@@ -11,8 +18,8 @@ if (!isset($_GET['id'])) {
 
 }
 
-$title = "Modificar Usuario";
 
+$title = "Modificar Usuario";
 require_once '../../model/Usuario.php';
 require_once '../../helpers/helpers.php';
 require_once '../resources/layout/head.php';
@@ -61,11 +68,14 @@ $datos = $usuario->obtenerUsuarioById();
 
                                         $codigos = obtenerCodigosPaises();
 
-                                        foreach ($codigos as $pais => $cod) {
+                                        foreach ($codigos as $pais => $cod) :
 
-                                            if ($cod != $datos['codigo_telefono'])
+                                            if ($cod != $datos['codigo_telefono']) :
                                                 echo "<option value='$cod'>$pais : $cod</option>";
-                                        }
+                                        
+                                            endif;
+
+                                        endforeach;
 
                                         ?>
 
@@ -117,11 +127,11 @@ $datos = $usuario->obtenerUsuarioById();
 
                                 if ($datos['nivel'] == 'Tecnico'):
 
-                                ?>
+                                    ?>
 
                                     <input type="hidden" name="nivel" id="nivel" value="Tecnico">
 
-                                <?php
+                                    <?php
 
                                 endif;
 

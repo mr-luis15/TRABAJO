@@ -61,7 +61,7 @@ try {
 
     if ($usuario->crear()) {
 
-        enviarRespuesta('success', 'Te has registrado con exito');
+        enviarRespuesta('success', 'Bienvenido ' . $usuario->nombre . ' es un placer que te hayas registrado con nosotros');
         exit;
     
     }

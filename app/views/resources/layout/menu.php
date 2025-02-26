@@ -43,19 +43,31 @@ $nivelUsuario = $_SESSION['usuario']['nivel'] ?? null;
 
 // Si el nivel de usuario existe en el array, mostrar el menú correspondiente
 if ($nivelUsuario && isset($niveles[$nivelUsuario])) :
+
 ?>
+
     <div class="sidebar">
         <div class="image-container">
             <img src="../resources/img/oso_polar.jpg" alt="Logo" />
         </div>
         <ul>
-            <?php foreach ($niveles[$nivelUsuario] as $nombre => $datos) : ?>
+
+            <?php
+
+            foreach ($niveles[$nivelUsuario] as $nombre => $datos) :
+
+            ?>
                 <li>
                     <a href="<?= $datos['ruta'] ?>">
                         <i class="<?= $datos['icono'] ?>"></i> <span><?= $nombre ?></span>
                     </a>
                 </li>
-            <?php endforeach; ?>
+
+            <?php
+
+            endforeach;
+
+            ?>
             <hr>
             <li>
                 <a id="logout" onclick="logout()">
@@ -65,7 +77,9 @@ if ($nivelUsuario && isset($niveles[$nivelUsuario])) :
             <hr>
         </ul>
     </div>
+
 <?php
+
 endif;
 
 

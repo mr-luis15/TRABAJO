@@ -1,8 +1,10 @@
+<?php 
 
+require_once '../layout/head.php';
+require_once '../layout/navbar.php'; 
 
-<?php require_once '../layout/head.php'; ?>
+?>
 
-<?php require_once '../layout/navbar.php'; ?>
 <div class="main">
     <h2>Mision</h2>
 
@@ -11,5 +13,8 @@
 </div>
 
 
+<?php 
 
-<?php require_once '../layout/footer.php'; ?>
+require_once '../layout/footer.php'; 
+
+?>

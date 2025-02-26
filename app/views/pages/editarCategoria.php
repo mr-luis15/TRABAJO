@@ -1,7 +1,12 @@
 <?php
 
-
 session_start();
+
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
+
+
+
 
 if (!isset($_GET['id'])) {
 
@@ -26,9 +31,9 @@ if ($categoria->existeCategoriaById() === false) {
 }
 
 
-$resultado = $categoria->obtenerCategoriaById();
+$datos = $categoria->obtenerCategoriaById();
 
-foreach ($resultado as $datos):
+//foreach ($resultado as $datos):
 
 
 ?>
@@ -47,7 +52,7 @@ foreach ($resultado as $datos):
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="descripcion" class="form-label">Descripcion</label>
+                                    <label for="descripcion" class="form-label">Descripcion (Maximo 255 caracteres)</label>
                                     <textarea name="descripcion" id="descripcion" class="form-control" required><?php echo $datos['descripcion']; ?></textarea>
                                 </div>
 
@@ -89,7 +94,7 @@ foreach ($resultado as $datos):
 <?php
 
 
-endforeach;
+//endforeach;
 require_once '../resources/layout/footer.php';
 
 

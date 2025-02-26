@@ -2,11 +2,8 @@
 
 session_start();
 
-if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nivel'] != 'Administrador') {
-
-    enviarRespuesta('error', 'No tienes permiso para realizar esta accion');
-    exit;
-}
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador']);
 
 
 require_once '../../model/Usuario.php';
@@ -40,7 +37,7 @@ if (!filter_var($usuario->correo, FILTER_VALIDATE_EMAIL)) {
 
 
 if (strlen($usuario->telefono) != 10) {
-    enviarRespuesta('error', 'EL telefono debe tener 10 digitos');
+    enviarRespuesta('error', 'El telefono debe tener 10 digitos');
     exit;
 }
 
@@ -50,15 +47,15 @@ if (!esTelefonoValido($usuario->telefono)) {
 }
 
 
-$datos = $usuario->obtenerUsuarioById();
+$datosActuales = $usuario->obtenerUsuarioById();
 
-if ($_SESSION['usuario']['id'] === $datos['id_usuario']) {
+if ($_SESSION['usuario']['id'] === $datosActuales['id_usuario']) {
     enviarRespuesta('error', 'No puedes modificar tu propia cuenta');
     exit;
 }
 
 
-if ($usuario->correo != $datos['correo']) {
+if ($usuario->correo != $datosActuales['correo']) {
     if ($usuario->existeUsuarioByEmail()) {
         enviarRespuesta('error', 'Ya hay un usuario con este correo');
         exit;
@@ -66,7 +63,7 @@ if ($usuario->correo != $datos['correo']) {
 }
 
 
-if ($usuario->telefono != $datos['telefono']) {
+if ($usuario->telefono != $datosActuales['telefono']) {
     if ($usuario->existeTelefono()) {
         enviarRespuesta('error', 'Este telefono ya esta registrado. Prueba con otro');
         exit;

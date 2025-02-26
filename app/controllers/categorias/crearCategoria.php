@@ -1,10 +1,6 @@
 <?php
 
 
-
-session_start();
-
-
 require_once '../../model/Categorias.php';
 require_once '../../helpers/validaciones.php';
 
@@ -33,7 +29,7 @@ try {
 
     if ($cat->crear()) {
 
-        enviarRespuesta('success', 'La categoria ' . $cat->getNombre() . ' se ha agragado con exito.');
+        enviarRespuesta('success', 'La categoria ' . $cat->getNombre() . ' se ha agregado con exito.');
         exit;
     
     }

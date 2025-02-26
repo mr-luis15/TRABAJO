@@ -2,10 +2,9 @@
 
 session_start();
 
-if (empty($_GET['id'])) {
-    echo "<script>alert('No se encontró el producto'); window.history.back();</script>";
-    exit;
-}
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Administrador', 'Secretaria de Compras', 'Secretaria de Ventas']);
+
 
 
 require_once '../../model/Categorias.php';
@@ -38,7 +37,7 @@ $datos = $productos->obtenerProductoById();
                             <form>
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" value="<?php echo $datos['nombre'] ?>" class="form-control" id="nombre">
+                                    <input type="text" value="<?php echo $datos['nombre'] ?>" class="form-control" name="nombre" id="nombre">
                                 </div>
 
                                 <div class="mb-3">
@@ -52,7 +51,7 @@ $datos = $productos->obtenerProductoById();
                                     <select name="id_categoria" id="id_categoria" class="form-control">
 
 
-                                        <option value="<?php echo isNull($datos['categoria'], "No asignada") ?>"> <?php echo isNull($datos['categoria_nombre'], "No asignada") ?> </option>
+                                        <option value="<?php echo isNull($datos['categoria'], 'No asignada') ?>"> <?php echo isNull($datos['categoria_nombre'], "No asignada") ?> </option>
 
                                         <?php
 
@@ -82,12 +81,12 @@ $datos = $productos->obtenerProductoById();
 
                                 <div class="mb-3">
                                     <label for="precio" class="form-label">Precio</label>
-                                    <input type="number" value="<?php echo $datos['precio'] ?>" class="form-control" id="precio">
+                                    <input type="number" value="<?php echo $datos['precio'] ?>" class="form-control" name="precio" id="precio">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="stock" class="form-label">Stock</label>
-                                    <input type="number" value="<?php echo $datos['stock'] ?>" class="form-control" id="stock">
+                                    <input type="number" value="<?php echo $datos['stock'] ?>" class="form-control" name="stock" id="stock">
                                 </div>
 
                                 <input type="hidden" name="id" id="id" value="<?php echo $datos['id']; ?>">
@@ -116,7 +115,7 @@ $datos = $productos->obtenerProductoById();
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion_actual" class="form-label">Descripcion</label>
-                                    <textarea name="descripcion" id="descripcion" class="form-control" id="descripcion_actual" disabled><?php echo $datos['descripcion']; ?></textarea>
+                                    <textarea class="form-control" id="descripcion_actual" disabled><?php echo $datos['descripcion']; ?></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="categoria_actual" class="form-label">Categoria</label>

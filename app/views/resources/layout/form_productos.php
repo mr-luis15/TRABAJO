@@ -33,10 +33,11 @@ $resultado = $categorias->obtenerCategorias();
 
                             <?php
 
-                            foreach ($resultado as $cat) {
+                            foreach ($resultado as $cat) :
 
                                 echo "<option value=" . $cat['id'] . "> " . $cat['nombre'] . " </option>";
-                            }
+                            
+                            endforeach;
 
                             ?>
 
@@ -55,7 +56,7 @@ $resultado = $categorias->obtenerCategorias();
 
                     <div class="form-group">
                         <label for="precio" class="col-form-label">Precio:</label>
-                        <input type="number" class="form-control" name="precio" id="precio" required>
+                        <input type="number" class="form-control" name="precio" step="0.01" id="precio" required>
                     </div>
                     <div class="form-group">
                         <label for="stock" class="col-form-label">Stock:</label>
@@ -63,14 +64,14 @@ $resultado = $categorias->obtenerCategorias();
                     </div>
 
                     <div class="form-group">
-                        <label for="formFile" class="form-label">Agregar una imagen</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <label for="foto" class="form-label">Agregar una imagen (No es obligatorio)</label>
+                        <input class="form-control" type="file" id="foto" name="foto">
                     </div>
 
                     <input type="hidden" value="Tecnico" name="nivel" id="nivel">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-success" id="agregar_producto"><i class="fas fa-user-plus"></i> Registrar producto</button>
+                        <button type="button" class="btn btn-success" id="agregar_producto"><i class="fas fa-boxes"></i> Registrar producto</button>
                     </div>
                 </form>
             </div>

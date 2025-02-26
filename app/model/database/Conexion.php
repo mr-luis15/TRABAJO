@@ -15,7 +15,7 @@ class Conexion
     private $USER = "admin";
     private $PASSWORD = "12345";
     private $DBNAME = "nueva";
-    */  
+    */ 
 
     public function conexion() {
 
@@ -26,7 +26,7 @@ class Conexion
 
         } catch(PDOException $e) {
 
-            echo "<script>alert('No se pudo conectar');</script>";
+            echo "<script>alert('Hubo un error de conexion: ".$e->getMessage()."');</script>";
             return $e->getMessage();
 
         }
