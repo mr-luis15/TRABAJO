@@ -264,11 +264,6 @@ $(document).ready(function () {
             formData.append('foto', archivo);
         }
 
-        // Imprimir los datos de formData
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ':', pair[1]);
-        }
-
         $.ajax({
             url: controller('productos', 'crearProducto'),
             type: 'POST',
@@ -289,8 +284,14 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                error_servidor();
+                console.error("Error AJAX:", xhr.responseText); // Muestra la respuesta en la consola
+                Swal.fire({
+                    title: "Error de servidor",
+                    text: "Revisa la consola para más detalles.",
+                    icon: "error",
+                });
             }
+            
         });
     });
 });

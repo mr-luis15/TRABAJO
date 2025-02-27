@@ -15,7 +15,15 @@ class Conexion
     private $USER = "admin";
     private $PASSWORD = "12345";
     private $DBNAME = "nueva";
-    */ 
+    */
+    
+    /**
+     * Datos ftp
+     * 
+     * ftp-climapolardll.alwaysdata.net
+     * climapolardll
+     * 
+     */
 
     public function conexion() {
 

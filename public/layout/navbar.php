@@ -13,12 +13,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link active" aria-current="page" href="bienvenido.php">Home</a>
-                <a class="nav-link" href=<?php echo Route::app("login"); ?>>Iniciar Sesión</a>
-                <a class="nav-link" href=<?php echo Route::app("registrarse"); ?>>Registrarse</a>
-                <a class="nav-link" href="mision.php">Misión</a>
-                <a class="nav-link" href="vision.php">Visión</a>
-                <a class="nav-link" href="contactanos.php">Contáctanos</a>
+                <a class="nav-link active" aria-current="page" href="bienvenido.php"><b>Bienvenido</b></a>
+                <a class="nav-link" href=<?php echo Route::app("login"); ?>><b>Iniciar Sesión</b></a>
+                <a class="nav-link" href=<?php echo Route::app("registrarse"); ?>><b>Registrarse</b></a>
+                <a class="nav-link" href="mision.php"><b>Misión</b></a>
+                <a class="nav-link" href="vision.php"><b>Visión</b></a>
+                <a class="nav-link" href="contactanos.php"><b>Contáctanos</b></a>
             </div>
         </div>
     </div>

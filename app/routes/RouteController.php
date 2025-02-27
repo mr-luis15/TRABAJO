@@ -10,10 +10,9 @@
 
 function nivelesPermitidos($niveles)
 {
+    $nivel = $_SESSION['usuario']['nivel'];
 
-    $nivel = $_SESSION['usuario']['nivel'] ?? null;
-
-    if (!$nivel || !in_array($nivel, $niveles)) {
+    if (empty($nivel) || !in_array($nivel, $niveles)) {
         Route::msg('Error');
         exit;
     }

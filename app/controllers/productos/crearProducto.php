@@ -17,7 +17,6 @@ $categoria = new Categorias();
 
 
 $categoria->setId($_POST['id_categoria']);
-$producto->setId($_POST['id']);
 $producto->setNombre($_POST['nombre']);
 $producto->setDescripcion($_POST['descripcion']);
 $producto->setStock($_POST['stock']);
@@ -59,12 +58,16 @@ if ($producto->existeProductoByNombre()) {
 
 //AQUI HAREMOS LA LOGICA DE LAS IMAGENES Y LAS RUTAS
 
-$nombreImagen = $_FILES['foto']['name'];
-$tipoImagen = $_FILES['foto']['type'];
-$tmp_name = $_FILES['foto']['tmp_name'];
 $dir = "../uploaded_images/";
 
-if (!empty($nombreImagen)) {
+if (isset($_FILES['foto']) && !empty($_FILES['foto']['name'])) {
+
+
+    $nombreImagen = $_FILES['foto']['name'];
+    $tipoImagen = $_FILES['foto']['type'];
+    $tmp_name = $_FILES['foto']['tmp_name'];
+
+
 
 
     //Aqui varificamos si la imagen es de tipo jpg, png o jpeg
@@ -97,7 +100,7 @@ if (!empty($nombreImagen)) {
     if (!$bandera) {
 
         //Si no encontramos una imagen con el mismo nombre, intentamos mover la imagen actual a la carpetta de upload_images
-        $destino = $ruta . basename($nombreImagen);
+        $destino = "../../views/uploaded_images/" . basename($nombreImagen);
 
         if (!move_uploaded_file($tmp_name, $destino)) {
             $error = error_get_last();
@@ -107,10 +110,11 @@ if (!empty($nombreImagen)) {
 
 
     //Independientemente de si se agrego o no la imagen, se inserta la ruta
-    $rutaImagen = $dir . $nombreImagen;
+    $rutaImagen = $dir . basename($nombreImagen);
     $producto->setImage($rutaImagen);
-    
+
 } else {
+
     $producto->setImage($dir . 'default.jpg');
 }
 
@@ -120,10 +124,9 @@ if (!empty($nombreImagen)) {
 try {
 
     if ($producto->crear()) {
-        enviarRespuesta('success', 'El producto se ha agregado con éxito.');
+        enviarRespuesta('success', 'El producto '.$producto->getNombre().' se ha agregado con éxito.');
         exit;
     }
-
 } catch (Exception $e) {
 
     enviarRespuesta('error', 'Se ha producido un error: ' . $e->getMessage());

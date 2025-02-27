@@ -59,7 +59,7 @@ if ($nivelUsuario && isset($niveles[$nivelUsuario])) :
             ?>
                 <li>
                     <a href="<?= $datos['ruta'] ?>">
-                        <i class="<?= $datos['icono'] ?>"></i> <span><?= $nombre ?></span>
+                        <i class="<?= $datos['icono'] ?>"></i> <b><?= $nombre ?></b>
                     </a>
                 </li>
 
@@ -71,7 +71,7 @@ if ($nivelUsuario && isset($niveles[$nivelUsuario])) :
             <hr>
             <li>
                 <a id="logout" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> <span>Salir</span>
+                    <i class="fas fa-sign-out-alt"></i> <b>Salir</b>
                 </a>
             </li>
             <hr>

@@ -8,7 +8,7 @@
                     <i class="fas fa-users"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Clientes</p>
+                    <b>Clientes</b>
                 </div>
             </a>
             <a id="productos" href="<?php echo Route::url('productos'); ?>">
@@ -16,7 +16,7 @@
                     <i class="fas fa-wind"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Productos</p>
+                    <b>Productos</b>
                 </div>
             </a>
             <a id="pedidos" href="<?php echo Route::url('pedidos'); ?>">
@@ -24,7 +24,7 @@
                     <i class="fas fa-truck-moving"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Pedidos</p>
+                    <b>Pedidos</b>
                 </div>
             </a>
             <a id="servicios" href="<?php echo Route::url('servicios'); ?>">
@@ -32,7 +32,7 @@
                     <i class="fas fa-calendar-week"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Servicios</p>
+                    <b>Servicios</b>
                 </div>
             </a>
         </div>
@@ -42,7 +42,7 @@
                     <i class="fas fa-user-tie"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Empleados</p>
+                    <b>Empleados</b>
                 </div>
             </a>
             <a id="categoria" href="<?php echo Route::url('categorias'); ?>">
@@ -50,7 +50,7 @@
                     <i class="fas fa-sitemap"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Categoria</p>
+                    <b>Categorias</b>
                 </div>
             </a>
             <a id="tecnicos" href="<?php echo Route::url('tecnicos'); ?>">
@@ -58,7 +58,7 @@
                     <i class="fas fa-users-cog"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Tecnicos</p>
+                    <b>Tecnicos</b>
                 </div>
             </a>
             <a id="inventario" href="<?php echo Route::url('inventario'); ?>">
@@ -66,7 +66,7 @@
                     <i class="fas fa-boxes"></i>
                 </div>
                 <div class="contenedor-texto">
-                    <p>Inventario</p>
+                    <b>Inventario</b>
                 </div>
             </a>
         </div>
