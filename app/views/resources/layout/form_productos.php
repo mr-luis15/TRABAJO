@@ -60,7 +60,7 @@ $resultado = $categorias->obtenerCategorias();
                     </div>
                     <div class="form-group">
                         <label for="stock" class="col-form-label">Stock:</label>
-                        <input type="number" class="form-control" name="stock" id="stock" required>
+                        <input type="number" class="form-control" name="stock" id="stock" placeholder="Si el stock es 0 el estado se marcará como 'No disponible'" required>
                     </div>
 
                     <div class="form-group">

@@ -35,6 +35,14 @@ $niveles = [
         'Dashboard' => ['ruta' => 'dashboard.php', 'icono' => 'fas fa-home'],
         'Pedidos' => ['ruta' => 'pedidos.php', 'icono' => 'fas fa-truck-moving'],
         'Servicios' => ['ruta' => 'servicios.php', 'icono' => 'fas fa-box-open']
+    ],
+    'Cliente' => [
+        'Mi perfil' => ['ruta' => 'perfil.php', 'icono' => 'fas fa-users'],
+        'Citas' => ['ruta' => 'citas.php', 'icono' => 'fas fa-box-open'],
+        'Mis pedidos' => ['ruta' => 'pedidos.php', 'icono' => 'fas fa-cart-arrow-down'],
+        'Favoritos' => ['ruta' => 'favoritos.php', 'icono' => 'fas fa-heart'],
+        'Soporte' => ['ruta' => 'soporte.php', 'icono' => 'fas fa-headset'],
+
     ]
 ];
 

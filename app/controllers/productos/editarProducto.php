@@ -33,15 +33,16 @@ if ($producto->getPrecio() <= 0 || $producto->getStock() < 0) {
 
 
 
+if ($producto->getStock() == 0) {
+    $producto->setEstado('No disponible');
+}
 
-$estado = ($producto->getStock() == 0) ? 'No disponible' : 'Disponible';
-$producto->setEstado($estado);
 
 
 
 $resultado = $producto->obtenerProductoById();
 
-//Verificamos si el nombre a modificar es igual al del mismo producto
+//Verificamos si el nombre a modificar es igual al nombre actual del producto
 if ($resultado['nombre'] != $producto->getNombre()) {
     if ($producto->existeProductoByNombre()) {
         enviarRespuesta('error', 'Ya hay un producto con este nombre');

@@ -41,6 +41,7 @@ $estado = ($producto->getStock() == 0) ? 'No disponible' : 'Disponible';
 $producto->setEstado($estado);
 
 
+
 // Verificar si la categoría existe
 if (!$categoria->existeCategoriaById()) {
     enviarRespuesta('error', 'La categoría seleccionada no existe.');
@@ -52,7 +53,6 @@ if ($producto->existeProductoByNombre()) {
     enviarRespuesta('error', 'Ya existe un producto con este nombre. Debes elegir otro.');
     exit;
 }
-
 
 
 
@@ -103,8 +103,10 @@ if (isset($_FILES['foto']) && !empty($_FILES['foto']['name'])) {
         $destino = "../../views/uploaded_images/" . basename($nombreImagen);
 
         if (!move_uploaded_file($tmp_name, $destino)) {
-            $error = error_get_last();
-            enviarRespuesta('error', 'No se pudo mover la imagen al directorio destino. Error: ' . $error['message']);
+            //$error = error_get_last();
+            //enviarRespuesta('error', 'No se pudo mover la imagen al directorio destino. Error: ' . $error['message']);
+            enviarRespuesta('error', 'No se pudo mover la imagen al directorio destino.');
+            exit;
         }
     }
 
@@ -116,6 +118,7 @@ if (isset($_FILES['foto']) && !empty($_FILES['foto']['name'])) {
 } else {
 
     $producto->setImage($dir . 'default.jpg');
+
 }
 
 
@@ -127,6 +130,7 @@ try {
         enviarRespuesta('success', 'El producto '.$producto->getNombre().' se ha agregado con éxito.');
         exit;
     }
+    
 } catch (Exception $e) {
 
     enviarRespuesta('error', 'Se ha producido un error: ' . $e->getMessage());
