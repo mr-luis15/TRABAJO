@@ -1,5 +1,5 @@
 <div class="main">
-    <h1>Dashboard</h1>
+    <h1>Sistema de inventario</h1>
     <h4>Bienvenid@ <?php echo $_SESSION['usuario']['nombre']; ?></h5>
         <hr>
         <div class="contenedor-botones">

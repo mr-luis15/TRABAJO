@@ -2,7 +2,12 @@
 
 session_start();
 
+require_once '../../routes/RouteController.php';
+nivelesPermitidos(['Cliente']);
+
+
 $nombreCliente = $_SESSION['usuario']['nombre'];
+
 
 require_once '../resources/layout/head.php';
 require_once '../resources/layout/menu.php';
@@ -143,7 +148,9 @@ require_once '../resources/layout/menu.php';
 
     <!-- Contenedor de tarjetas o Barra -->
     <div class="contenedor">
+        
         <?php
+        
         $tarjetas = [
             ["Pedidos Actuales", "fa-box"],
             ["Historial de Compras", "fa-history"],
@@ -154,14 +161,18 @@ require_once '../resources/layout/menu.php';
         foreach ($tarjetas as $tarjeta) {
             echo "<div class='card'><i class='fas {$tarjeta[1]}'></i> {$tarjeta[0]}</div>";
         }
+
         ?>
+
     </div>
 
     <!-- Catálogo de Aires Acondicionados -->
     <div class="catalogo">
         <h2>Catálogo de Aires Acondicionados</h2>
         <div class="productos">
+
             <?php
+            
             $productos = [
                 ["Aire Split LG", "lg.png", "$450"],
                 ["Aire Samsung 12000 BTU", "samsung.png", "$500"],
@@ -179,7 +190,9 @@ require_once '../resources/layout/menu.php';
                             </div>
                         ";
             }
+            
             ?>
+
         </div>
     </div>
 

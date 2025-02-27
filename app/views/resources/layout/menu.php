@@ -1,7 +1,7 @@
 <?php
 $niveles = [
     'Administrador' => [
-        'Dashboard' => ['ruta' => 'dashboard.php', 'icono' => 'fas fa-home'],
+        'Principal' => ['ruta' => 'dashboard.php', 'icono' => 'fas fa-home'],
         'Empleados' => ['ruta' => 'empleados.php', 'icono' => 'fas fa-user-tie'],
         'Técnicos' => ['ruta' => 'tecnicos.php', 'icono' => 'fas fa-users-cog'],
         'Clientes' => ['ruta' => 'clientes.php', 'icono' => 'fas fa-users'],
@@ -37,6 +37,7 @@ $niveles = [
         'Servicios' => ['ruta' => 'servicios.php', 'icono' => 'fas fa-box-open']
     ],
     'Cliente' => [
+        'Principal' => ['ruta' => 'CliBoard.php', 'icono' => 'fas fa-home'],
         'Mi perfil' => ['ruta' => 'perfil.php', 'icono' => 'fas fa-users'],
         'Citas' => ['ruta' => 'citas.php', 'icono' => 'fas fa-box-open'],
         'Mis pedidos' => ['ruta' => 'pedidos.php', 'icono' => 'fas fa-cart-arrow-down'],
